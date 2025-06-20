@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: #ff4d4d;
+      text-align: center;
+      font-family: sans-serif;
+      color: white;
+      padding-top: 100px;
+    }
+
+    .btn-start {
+      background-color: white;
+      color: black;
+      padding: 15px 30px;
+      border-radius: 30px;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 30px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .description {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .image-placeholder {
+      width: 200px;
+      height: 200px;
+      margin: 30px auto;
+      background-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <h1>밥풀</h1>
+
+  <div class="image-placeholder"></div>
+
+  <div class="description" style="margin-bottom: 100px">
+    지금 가진 돈으로 <br>
+    먹을 수 있는 음식을 찾아보세요!
+  </div>
+
+  <div>
+    <a href="{% url 'accounts:login' %}" class="btn-start">시작하기</a>
+  </div>
+</body>
+</html>
