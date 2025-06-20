@@ -1,8 +1,8 @@
 # menu/models.py
-
 from django.db import models
 from search.models import School
 from accounts.models import Profile
+from datetime import datetime
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -44,4 +44,13 @@ class Review(models.Model):
     def __str__(self):
         return f"{self.writer.nickname}님의 {self.menu.name} 리뷰"
 
-    
+class VisitLog(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='visit_logs')
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='visit_logs')
+    menu = models.ForeignKey(Menu, on_delete=models.SET_NULL, null=True, blank=True, related_name='visit_logs')
+
+    visited_at = models.DateTimeField(default=datetime.now)
+    reviewed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.nickname} 방문 - {self.store.name}"

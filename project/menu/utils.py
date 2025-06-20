@@ -22,7 +22,7 @@ def extract_main_category(category_full: str) -> str:
 def get_restaurants_nearby_school(school):
     url = "https://dapi.kakao.com/v2/local/search/keyword.json"
     headers = {
-        "Authorization": "KakaoAK c667f7edb965566d20e472b3b30b4c4d"  # ← 너의 REST API 키
+        "Authorization": "KakaoAK c667f7edb965566d20e472b3b30b4c4d" 
     }
 
     restaurants = []
