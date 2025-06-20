@@ -1,0 +1,11 @@
+<form method="get" action="{% url 'search:recommend_result' %}">
+  <input type="number" name="price" placeholder="예: 5000원" required>
+  
+  <select name="radius">
+    <option value="500">500m</option>
+    <option value="1000">1km</option>
+  </select>
+
+  <button type="submit">검색</button>
+</form>
+<p>📌 현재 필터링된 금액: {{ price }}원 이하</p>
