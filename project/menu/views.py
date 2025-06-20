@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Store, Menu , Review
+from .models import Store, Menu , Review ,VisitLog
 
 def store_detail(request, store_id, menu_id):
     store = get_object_or_404(Store, id=store_id)
@@ -22,3 +22,14 @@ def store_review_list(request, store_id):
         'store': store,
         'reviews': reviews,
     })
+    
+def store_location(request, store_id):
+    store = get_object_or_404(Store, id=store_id)
+    user = request.user.profile
+
+    VisitLog.objects.create(user=user, store=store)
+    context = {
+        'store': store,  # store.name, store.latitude, store.longitude 등을 템플릿에서 사용
+    }
+
+    return render(request, 'menu/store_location.html', context)
