@@ -1,0 +1,20 @@
+<h2>{{ price }}원 이하 메뉴</h2>
+<form method="get" action=".">
+  <input type="hidden" name="price" value="{{ price }}">
+  <select name="radius">
+    <option value="500" {% if radius == 500 %}selected{% endif %}>500m</option>
+    <option value="1000" {% if radius == 1000 %}selected{% endif %}>1km</option>
+  </select>
+  <button type="submit">적용</button>
+</form>
+
+
+<div class="menu-list">
+  {% for m in menus %}
+    <div class="menu-card">
+      <img src="{{ m.image.url }}" alt="{{ m.name }}">
+      <h3>{{ m.name }} ({{ m.price }}원)</h3>
+      <p>{{ m.store.name }}</p>
+    </div>
+  {% endfor %}
+</div>
