@@ -1,0 +1,13 @@
+<!-- menu/templates/menu/store_detail.html -->
+
+<h2>{{ store.name }} ({{ store.category.name }})</h2>
+<p>{{ store.address }}</p>
+
+<h3>MENU</h3>
+<ul>
+  {% for menu in menus %}
+    <li {% if menu.id == selected_menu.id %} style="color:deeppink;" {% endif %}>
+      {{ menu.name }} / {{ menu.price }}원
+    </li>
+  {% endfor %}
+</ul>

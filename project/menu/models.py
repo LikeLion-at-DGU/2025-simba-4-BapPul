@@ -2,6 +2,7 @@
 
 from django.db import models
 from search.models import School
+from accounts.models import Profile
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -30,3 +31,17 @@ class Menu(models.Model):
 
     def __str__(self):
         return f"{self.store.name} - {self.name} ({self.price}원)"
+
+class Review(models.Model):
+    writer = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reviews')
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='reviews')
+    created_at = models.DateField(auto_now_add=True)
+
+    content = models.TextField(blank=True)  # 리뷰 텍스트 (선택)
+    rating = models.IntegerField(default=5)  # 별점: 1~5
+    image = models.ImageField(upload_to='review_images/', blank=True, null=True)  # 사진
+
+    def __str__(self):
+        return f"{self.writer.nickname}님의 {self.menu.name} 리뷰"
+
+    

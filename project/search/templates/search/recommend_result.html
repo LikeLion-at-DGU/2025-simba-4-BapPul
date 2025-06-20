@@ -30,8 +30,10 @@
   <ul>
     {% for menu in menus %}
       <li>
+      <a href="{% url 'menu:store_detail' store_id=menu.store.id menu_id=menu.id %}">
         <strong>{{ menu.name }}</strong> - {{ menu.price }}원 <br>
         가게: {{ menu.store.name }}
+      </a>
       </li>
     {% endfor %}
   </ul>
