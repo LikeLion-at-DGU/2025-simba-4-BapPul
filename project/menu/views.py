@@ -27,9 +27,18 @@ def store_location(request, store_id):
     store = get_object_or_404(Store, id=store_id)
     user = request.user.profile
 
-    VisitLog.objects.create(user=user, store=store)
-    context = {
-        'store': store,  # store.name, store.latitude, store.longitude 등을 템플릿에서 사용
-    }
+    menu_id = request.GET.get('menu_id')
+    menu = get_object_or_404(Menu, id=menu_id) if menu_id else None
 
+    VisitLog.objects.create(user=user, store=store, menu=menu)
+
+    context = {
+        'store': store,
+        'menu': menu,
+    }
     return render(request, 'menu/store_location.html', context)
+
+
+def store_review(request, store_id, menu_id):
+    store = get_object_or_404(Store, id = store_id)
+    menu = get_object_or_404(Menu, id = menu_id)
