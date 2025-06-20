@@ -39,22 +39,23 @@ def recommend_result(request):
 
     price = int(request.GET.get('price', 5000))
     radius = int(request.GET.get('radius', 500))
-    category = request.GET.get('category')
+    category_name = request.GET.get('category')  # 문자열 e.g. "한식"
 
     all_stores = Store.objects.filter(school=school)
+    if category_name:  # ✅ 선택된 카테고리 있을 때만 필터
+        all_stores = all_stores.filter(category__name=category_name)
+
     nearby_ids = [
         s.id for s in all_stores
         if haversine(s.latitude, s.longitude, school.latitude, school.longitude) * 1000 <= radius
     ]
 
     menus = Menu.objects.filter(store__id__in=nearby_ids, price__lte=price)
-    if category:
-        menus = menus.filter(category__name=category)
 
     return render(request, 'search/recommend_result.html', {
         'menus': menus,
         'price': price,
         'radius': radius,
-        'selected_category': category,
-        'categories': ["한식", "일식", "중식", "양식", "분식", "기타"],
+        'selected_category': category_name,
+        'categories': ["한식", "일식", "중식", "양식", "분식", "기타"],  # 이건 Category 테이블에서 불러오게도 가능
     })

@@ -1,3 +1,5 @@
+<p><strong>📍 현재 설정된 학교:</strong> {{ school.name }}</p>
+
 <form method="get" action="{% url 'search:recommend_result' %}">
   <input type="number" name="price" placeholder="예: 5000원" required>
   
@@ -8,4 +10,4 @@
 
   <button type="submit">검색</button>
 </form>
-<p>📌 현재 필터링된 금액: {{ price }}원 이하</p>
+
