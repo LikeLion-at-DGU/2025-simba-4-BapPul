@@ -1,0 +1,61 @@
+<style>
+    body {
+      background-color: #ff4d4d;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      font-family: sans-serif;
+    }
+
+    .menu-card {
+      background: white;
+      color: black;
+      width: 280px;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      padding: 10px;
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .menu-info {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .menu-info strong {
+      font-size: 18px;
+    }
+
+    .meta {
+      color: gray;
+      font-size: 14px;
+    }
+  </style>
+
+<h2>오늘의 추천 메뉴</h2>
+
+  {% if menu %}
+  <div class="menu-card">
+    {% if menu.image %}
+      <img src="{{ menu.image.url }}" alt="메뉴 이미지">
+    {% else %}
+      <div style="width:100%; height:180px; background:#eee; border-radius:12px;"></div>
+    {% endif %}
+
+    <div class="menu-info">
+      <strong>{{ menu.name }}</strong> <span class="meta">{{ menu.store.name }}</span><br>
+      <span class="meta">영업 중</span> &nbsp;
+      <span style="color:red;">★ 4.5</span> &nbsp;
+      <span class="meta">리뷰 999+</span>
+    </div>
+  </div>
+  {% else %}
+    <p>조건에 맞는 메뉴가 없습니다.</p>
+  {% endif %}

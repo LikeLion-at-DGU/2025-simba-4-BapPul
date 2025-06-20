@@ -15,6 +15,15 @@
 </form>
 
 <hr>
+<!-- ✅ 랜덤 추천 폼 -->
+<form method="get" action="{% url 'search:random' %}" style="margin-top: 10px;">
+  <input type="hidden" name="price" value="{{ price }}">
+  <input type="hidden" name="radius" value="{{ radius }}">
+  {% if selected_category %}
+    <input type="hidden" name="category" value="{{ selected_category }}">
+  {% endif %}
+  <button type="submit">🎲 랜덤 추천</button>
+</form>
 
 <!-- ✅ 실제 메뉴 출력 -->
 {% if menus %}
