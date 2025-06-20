@@ -1,0 +1,13 @@
+<h2>{{ store.name }} - 전체 리뷰</h2>
+
+<ul>
+  {% for review in reviews %}
+    <li>
+      <strong>🍽 {{ review.menu.name }}</strong><br>
+      ⭐ {{ review.rating }}점 - {{ review.content }}<br>
+      {{ review.writer.nickname }} / {{ review.created_at }}
+    </li>
+  {% empty %}
+    <li>아직 리뷰가 없습니다.</li>
+  {% endfor %}
+</ul>
