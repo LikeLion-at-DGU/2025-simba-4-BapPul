@@ -42,3 +42,9 @@ def store_location(request, store_id):
 def store_review(request, store_id, menu_id):
     store = get_object_or_404(Store, id = store_id)
     menu = get_object_or_404(Menu, id = menu_id)
+    
+    context = {
+        'store':store,
+        'menu':menu,
+    }
+    return render(request, 'menu/store_review.html', context)
