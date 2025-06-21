@@ -20,7 +20,7 @@ class Store(models.Model):
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)  # ✅ 여기 추가
     number = models.TextField(null=True, blank=True)
     open_time = models.TextField(null= True, blank = True)
-    image = models.ImageField(upload_to='menu_images/', null=True, blank=True) 
+    image = models.ImageField(upload_to='store_images/', null=True, blank=True) 
 
     def __str__(self):
         return f"{self.name} ({self.school.name})"
