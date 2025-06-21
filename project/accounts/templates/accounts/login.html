@@ -14,29 +14,32 @@
   <div class="container">
     <h1>로그인</h1>
     <div class="Frame">
-      <form action="" method="get">
+      <form action="" method="post">
+        {% csrf_token %}
         <div class="input-group">
-          <input type="text" id="user-id" name="user-id" placeholder="아이디" required>
+          <input type="text" id="user-id" name="username" placeholder="아이디" required>
         </div>
 
         <div class="input-group">
-          <input type="password" id="user-pw" name="user-pw" placeholder="비밀번호" required>
+          <input type="password" id="user-pw" name="password" placeholder="비밀번호" required>
         </div>
 
         <div class="button">
-          <button type="submit" id="loginBtn" >로그인</button>
+          <button type="submit" id="loginBtn" onclick="location.href='{% url "search:home" %}'">로그인</button>
         </div>
 
         <a href={% url 'accounts:signup' %}>회원가입</a>
       </form>
 
-      
+
     </div>
 
 
 
   </div>
-
+  {% if error %}
+  <p style="color:red;">{{ error }}</p>
+  {% endif %}
 </body>
 
 </html>
