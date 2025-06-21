@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Store, Menu , Review ,VisitLog
 
 def store_detail(request, store_id, menu_id):
@@ -39,13 +39,27 @@ def store_location(request, store_id, menu_id):
 
 
 def store_review(request, store_id, menu_id):
-    store = get_object_or_404(Store, id = store_id)
-    menu = get_object_or_404(Menu, id = menu_id)
-    selected_menu = get_object_or_404(Menu, id=menu_id, store=store)
-    
-    context = {
-        'store':store,
-        'menu':menu,
-    }
+    store = get_object_or_404(Store, id=store_id)
+    menu = get_object_or_404(Menu, id=menu_id)
 
-    return render(request, 'menu/store_review.html', context)
+    if request.method == 'POST':
+        rating = request.POST.get('rating')
+        image = request.FILES.get('photo')
+        Review.objects.create(
+            writer=request.user.profile,
+            menu=menu,
+            rating=rating,
+            image= image,
+        )
+        return render(request, 'menu/review_confirm.html', {
+            'store': store,
+            'menu': menu,
+            'rating': rating,
+            'nickname': request.user.profile.nickname,
+            'image': image,
+        })
+
+    return render(request, 'menu/store_review.html', {
+        'store': store,
+        'menu': menu,
+    })
