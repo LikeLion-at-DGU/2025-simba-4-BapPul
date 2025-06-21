@@ -20,7 +20,7 @@
         <p class="topBar-right"></p>
     </div>
 
-    <form action="" method="get">
+    <form action="" method="post">
         <div class="IdPw">
             <div class="ID">
                 <h3>아이디</h3>
@@ -30,13 +30,13 @@
 
             <div class="PW">
                 <h3>비밀번호</h3>
-                <input type="text" id="user-pw" name="user-pw" placeholder="입력" required>
+                <input type="password" id="user-pw" name="user-pw" placeholder="입력" required>
                 <p>영문, 숫자를 포함한 8자 이상으로 작성해주세요.</p>
             </div>
 
             <div class="pwCheck">
                 <h3>비밀번호 확인</h3>
-                <input type="text" id="user-pwCheck" name="user-pwCheck" placeholder="입력" required>
+                <input type="password" id="user-pwCheck" name="user-pwCheck" placeholder="입력" required>
                 <p>비밀번호를 한 번 더 작성해주세요.</p>
             </div>
         </div>
@@ -56,9 +56,11 @@
         </div>
 
         <div class="button">
-            <button type="submit" id="registerBtn" disabled>회원가입 완료!</button>
+            <button type="submit" id="signupBtn" disabled>회원가입 완료!</button>
         </div>
     </form>
+
+    <script src="{% static 'js/signup.js' %}"></script>
 </body>
 
 </html>
