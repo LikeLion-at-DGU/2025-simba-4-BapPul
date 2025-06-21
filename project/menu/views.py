@@ -23,12 +23,11 @@ def store_review_list(request, store_id):
         'reviews': reviews,
     })
     
-def store_location(request, store_id):
+def store_location(request, store_id, menu_id):
     store = get_object_or_404(Store, id=store_id)
     user = request.user.profile
 
-    menu_id = request.GET.get('menu_id')
-    menu = get_object_or_404(Menu, id=menu_id) if menu_id else None
+    menu = get_object_or_404(Menu, id=menu_id)
 
     VisitLog.objects.create(user=user, store=store, menu=menu)
 
@@ -42,9 +41,11 @@ def store_location(request, store_id):
 def store_review(request, store_id, menu_id):
     store = get_object_or_404(Store, id = store_id)
     menu = get_object_or_404(Menu, id = menu_id)
+    selected_menu = get_object_or_404(Menu, id=menu_id, store=store)
     
     context = {
         'store':store,
         'menu':menu,
     }
+
     return render(request, 'menu/store_review.html', context)
