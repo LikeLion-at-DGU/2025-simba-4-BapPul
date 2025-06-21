@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import root_redirect_view  # 여기!
+from .views import root_redirect_view 
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +26,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('search/', include('search.urls')),
     path('menu/', include('menu.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
