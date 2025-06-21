@@ -1,56 +1,100 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    body {
-      background-color: #ff4d4d;
-      text-align: center;
-      font-family: sans-serif;
-      color: white;
-      padding-top: 100px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>firstpage</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    .btn-start {
-      background-color: white;
-      color: black;
-      padding: 15px 30px;
-      border-radius: 30px;
-      border: none;
-      font-weight: bold;
-      font-size: 16px;
-      margin-top: 30px;
-      cursor: pointer;
-      text-decoration: none;
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: linear-gradient(-27deg, #FD5D60, #FF4C4F);
+        }
 
-    .description {
-      font-size: 14px;
-      margin-top: 20px;
-    }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .image-placeholder {
-      width: 200px;
-      height: 200px;
-      margin: 30px auto;
-      background-color: lightgray;
-    }
-  </style>
+        .wrapper {
+            width: 100%;
+            height: 100svh;
+            padding: 0 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10vh;
+        }
+
+        h1 {
+            color: #FFFFFF;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20%;
+            margin-top: 30%;
+        }
+
+        img {
+            width: 240px;
+            height: 240px;
+            margin-bottom: 24px;
+        }
+
+        .image-placeholder {
+            width: 240px;
+            height: 240px;
+            background-color: #c6c6c6;
+            margin-bottom: 20%;
+        }
+
+        h3 {
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        button {
+            width: 90%;
+            max-width: 400px;
+            height: 55px;
+            background-color: #FFFFFF;
+            color: #000000;
+            font-weight: 700;
+            border-radius: 30px;
+            font-size: 18px;
+            border: none;
+            margin-bottom: 20%;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>밥풀</h1>
-
-  <div class="image-placeholder"></div>
-
-  <div class="description" style="margin-bottom: 100px">
-    지금 가진 돈으로 <br>
-    먹을 수 있는 음식을 찾아보세요!
-  </div>
-
-  <div>
-    <a href="{% url 'accounts:login' %}" class="btn-start">시작하기</a>
-  </div>
+    <div class="wrapper">
+        <div class="top">
+            <h1>밥플</h1>
+            <div class="image-placeholder"></div>
+            <h3>지금 가진 돈으로<br>먹을 수 있는 음식을 찾아보세요 !</h3>
+        </div>
+        <button>시작하기</button>
+    </div>
 </body>
+
 </html>
