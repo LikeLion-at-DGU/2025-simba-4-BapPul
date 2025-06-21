@@ -18,6 +18,7 @@ class Store(models.Model):
     longitude = models.FloatField()
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)  # ✅ 여기 추가
+    image = models.ImageField(upload_to='menu_images/', null=True, blank=True) 
 
     def __str__(self):
         return f"{self.name} ({self.school.name})"
@@ -54,3 +55,7 @@ class VisitLog(models.Model):
 
     def __str__(self):
         return f"{self.user.nickname} 방문 - {self.store.name}"
+    
+class Like(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='likes')
+    menu = models.ForeignKey(Menu, on_delete=models.SET_NULL, null=True, blank=True, related_name='likes')

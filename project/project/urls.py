@@ -23,5 +23,6 @@ urlpatterns = [
     path('', root_redirect_view, name='root_redirect'),
     path('accounts/', include('accounts.urls')),
     path('search/', include('search.urls')),
+    path('menu/', include('menu.urls')),
 ]
 
