@@ -18,6 +18,8 @@ class Store(models.Model):
     longitude = models.FloatField()
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)  # ✅ 여기 추가
+    number = models.TextField(null=True, blank=True)
+    open_time = models.TextField(null= True, blank = True)
     image = models.ImageField(upload_to='menu_images/', null=True, blank=True) 
 
     def __str__(self):
