@@ -1,0 +1,21 @@
+{% load static %}
+<h2>리뷰</h2>
+
+<div class="review-box">
+  <div class="image-box">
+    {% if image %}
+      <!-- 사용자가 업로드한 이미지가 있을 경우 -->
+      <img src="{{ image.url }}" alt="사용자 등록 이미지">
+    {% else %}
+      <!-- 이미지 없을 경우 기본 이미지 사용 -->
+      <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
+    {% endif %}
+  </div>
+
+  <div class="menu-info">
+    <strong>{{ menu.name }}</strong> <span>{{ store.name }}</span>
+    <p>⭐ {{ rating }}점</p>
+  </div>
+</div>
+
+<p><span style="color:red">{{ nickname }}</span>님의 리뷰가 등록되었습니다.</p>
