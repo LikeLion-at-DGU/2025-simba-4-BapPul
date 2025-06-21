@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile
@@ -23,7 +23,7 @@ def login(request):
   
 def logout(request): # {% url 'accounts:logout' %}
   auth.logout(request)
-  return redirect('search:home')
+  return redirect('accounts:start')
 
 def start_view(request):
   return render(request, 'accounts/start.html')
@@ -62,3 +62,10 @@ def signup(request):
     # GET 요청
     schools = School.objects.all()
     return render(request, 'accounts/signup.html', {'schools': schools})
+
+def mypage(request, id):
+    user=get_object_or_404(User, pk=id)
+    context = {
+        'user':user
+    }
+    return render(request, 'accounts/mypage.html', context)

@@ -1,4 +1,4 @@
-<p><strong>📍 현재 설정된 학교:</strong> {{ school.name }}</p>
+<!-- <p><strong>📍 현재 설정된 학교:</strong> {{ school.name }}</p>
 
 <form method="get" action="{% url 'search:recommend_result' %}">
   <input type="number" name="price" placeholder="예: 5000원" required>
@@ -10,4 +10,157 @@
 
   <button type="submit">검색</button>
 </form>
+-->
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>밥풀 - 메인</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; background: #fff; }
+    header {
+      background: #ff4d4d;
+      padding: 15px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+    }
+    .location { display: flex; align-items: center; gap: 5px; }
+    .radius-select {
+      background: white;
+      color: #ff4d4d;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .container { padding: 20px; text-align: center; }
+    h1 { color: #ff4d4d; font-size: 36px; margin-bottom: 20px; }
+    form input[type="number"] {
+      width: 60%;
+      padding: 10px;
+      border: 2px solid #ff4d4d;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    form select {
+      display: none; /* 기본 거리 선택은 토글 메뉴처럼 구현할 수도 있음 */
+    }
+    form button {
+      background: #ff4d4d;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      margin-left: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .ads { margin-top: 40px; }
+    .ads-title { text-align: left; font-weight: bold; margin-bottom: 10px; }
+    .ads-box {
+      background: #e5e5e5;
+      height: 150px;
+      border-radius: 20px;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+    }
+    footer img {
+      width: 24px;
+    }
+
+    .header-bar {
+      width: 100%;
+      height: 50px;
+      background-color: #ff4d4d;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .left {
+      font-weight: bold;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .right a,
+    .right span {
+      margin-left: 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-bar">
+      <div class="left">
+        <span>📍 {{ school.name }}</span>
+      </div>
+      <div class="right">
+        {% if user.is_authenticated %}
+          <span>{{ user.username }}</span>
+          <a href="{% url 'accounts:logout' %}">logout</a>
+          <a href="{% url 'accounts:mypage' request.user.id %}">mypage</a>
+        {% else %}
+          <a href="{% url 'accounts:login' %}">로그인</a>
+          <a href="{% url 'accounts:signup' %}">signup</a>
+        {% endif %}
+      </div>
+    </div>
+    
+    
+    
+    <form method="get" action="{% url 'search:recommend_result' %}">
+      <select name="radius" class="radius-select">
+        <option value="500">500m</option>
+        <option value="1000">1 km</option>
+        <option value="2500">2.5 km</option>
+        <option value="5000">5 km</option>
+      </select>
+  </header>
+
+  <div class="container">
+    <h1>밥플</h1>
+    <p>지금 가진 금액을 입력해주세요!</p>
+
+    <input type="number" name="price" placeholder="예: 5000원" required>
+    <button type="submit">검색</button>
+    </form>
+
+    <div class="ads">
+      <p class="ads-title">🔥 인기 있는 메뉴 (광고)</p>
+      <div class="ads-box"></div>
+    </div>
+  </div>
+
+  <footer>
+    <img src="{% static 'img/nav_user.png' %}" alt="유저">
+    <img src="{% static 'img/nav_main.png' %}" alt="홈">
+    <img src="{% static 'img/nav_heart.png' %}" alt="찜">
+  </footer>
+</body>
+</html>
