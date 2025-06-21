@@ -22,7 +22,6 @@ body {
     padding: 0 10%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -31,6 +30,14 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 10vh;
+}
+
+.bottom{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5%;
+    align-items: center;
 }
 
 h1 {
@@ -47,22 +54,17 @@ img {
     margin-bottom: 24px;
 }
 
-.image-placeholder {
-    width: 240px;
-    height: 240px;
-    background-color: #c6c6c6;
-    margin-bottom: 20%;
-}
 
 h3 {
     color: #FFFFFF;
     font-size: 18px;
     font-weight: 600;
     line-height: 1.4;
+    padding-bottom: 100px;
 }
 
 button {
-    width: 90%;
+    width: 100%;
     max-width: 400px;
     height: 55px;
     background-color: #FFFFFF;
