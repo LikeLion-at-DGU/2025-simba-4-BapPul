@@ -144,7 +144,9 @@
   {% endif %}
 
   <div class="menu-list">
-    <div class="menu-item">나의 찜 <span>›</span></div>
+    <a href="{% url 'accounts:my_likes' request.user.id %}" style="text-decoration: none;">
+      <div class="menu-item">나의 찜 <span>›</span></div>
+    </a>
     <div class="menu-item">방문 기록 <span>›</span></div>
     <div class="menu-item">나의 리뷰 <span>›</span></div>
   </div>
