@@ -5,7 +5,11 @@
     <li>
       <strong>🍽 {{ review.menu.name }}</strong><br>
       ⭐ {{ review.rating }}점 - {{ review.content }}<br>
-      {{ review.writer.nickname }} / {{ review.created_at }}
+      {{ review.writer.nickname }} / {{ review.created_at }}<br>
+
+      {% if review.image %}
+        <img src="{{ review.image.url }}" alt="리뷰 사진" width="200"><br>
+      {% endif %}
     </li>
   {% empty %}
     <li>아직 리뷰가 없습니다.</li>

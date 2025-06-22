@@ -1,19 +1,47 @@
-<!-- menu/templates/menu/store_detail.html -->
-
 <h2>{{ store.name }} ({{ store.category.name }})</h2>
-<p>{{ store.address }}</p>
+
+<p>
+  ⭐ 평균 별점: <strong>{{ avg_rating|default:"-" }}</strong> / 5.0<br>
+  📝 리뷰 개수: <strong>{{ review_count }}</strong>개<br>
+
+  ☎️ 전화번호: {{ store.number|default:"정보 없음" }}<br>
+  🕒 운영시간: {{ store.open_time|default:"정보 없음" }}<br>
+  🏠 주소 : {{ store.address }}
+</p>
 
 <h3>MENU</h3>
 <ul>
   {% for menu in menus %}
     <li {% if menu.id == selected_menu.id %} style="color:deeppink;" {% endif %}>
-      {{ menu.name }} / {{ menu.price }}원
+      <div>
+        <strong>{{ menu.name }}</strong> / {{ menu.price }}원<br>
+        {% if menu.image %}
+          <img src="{{ menu.image.url }}" alt="{{ menu.name }}" width="120">
+        {% endif %}
+      </div>
     </li>
   {% endfor %}
 </ul>
+
 <h3>
   <a href="{% url 'menu:store_review_list' store.id %}">리뷰 더보기</a>
 </h3>
+
+<h3>REVIEW</h3>
+<ul>
+  {% for review in recent_reviews %}
+    <li>
+      <strong>🍽 {{ review.menu.name }}</strong> - ⭐ {{ review.rating }}점<br>
+      {{ review.writer.nickname }} / {{ review.created_at }}<br>
+      {% if review.image %}
+        <img src="{{ review.image.url }}" alt="리뷰 사진" width="150"><br>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>아직 리뷰가 없습니다.</li>
+  {% endfor %}
+</ul>
+
 <h3>
   <a href="{% url 'menu:store_location' store.id selected_menu.id %}">먹으러 가기</a>
 </h3>
