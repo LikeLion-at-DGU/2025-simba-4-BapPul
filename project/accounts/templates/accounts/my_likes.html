@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>나의 찜 목록</title>
+  <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+  <style>
+    .like-list {
+      margin: 20px;
+      padding: 10px;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .like-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    .like-item:last-child {
+      border-bottom: none;
+    }
+    .like-item-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .like-item-sub {
+      font-size: 14px;
+      color: #555;
+    }
+    .like-item a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .like-item a:hover {
+      color: #ff4d88;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="margin: 20px;">🍽️ 나의 찜</h2>
+
+  <div class="like-list">
+    {% for like in likes %}
+      {% if like.menu %}
+      <div class="like-item">
+        <a href="{% url 'menu:store_detail' store_id=like.menu.store.id menu_id=like.menu.id %}">
+          <div class="like-item-title">{{ like.menu.name }}</div>
+          <div class="like-item-sub">{{ like.menu.store.name }}</div>
+        </a>
+      </div>
+      {% else %}
+      <div class="like-item">
+        <div class="like-item-title">[삭제된 메뉴]</div>
+      </div>
+      {% endif %}
+    {% empty %}
+      <p style="margin: 20px;">찜한 음식이 아직 없습니다.</p>
+    {% endfor %}
+  </div>
+
+  <div class="nav-bar">
+    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fa fa-user">mypage</i></a>
+    <a href="{% url 'search:home' %}"><i class="fa fa-home">home</i></a>
+    <a href="#"><i class="fa fa-map-marker-alt">stamp(기능X)</i></a>
+  </div>
+</body>
+</html>

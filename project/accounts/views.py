@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile
 from search.models import School
+from menu.models import Like
 
 # Create your views here.
 def login(request):
@@ -20,13 +21,13 @@ def login(request):
 
     return render(request, 'accounts/login.html')
 
-  
-def logout(request): # {% url 'accounts:logout' %}
-  auth.logout(request)
-  return redirect('accounts:start')
+
+def logout(request):  # {% url 'accounts:logout' %}
+    auth.logout(request)
+    return redirect('accounts:start')
 
 def start_view(request):
-  return render(request, 'accounts/start.html')
+    return render(request, 'accounts/start.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -36,7 +37,7 @@ def signup(request):
         nickname = request.POST['nickname']
         school_name = request.POST['school']
 
-        # 🛑 username 중복 체크
+        # username 중복 체크
         if User.objects.filter(username=username).exists():
             return render(request, 'accounts/signup.html', {
                 'error': '이미 존재하는 아이디입니다.'
@@ -64,8 +65,17 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'schools': schools})
 
 def mypage(request, id):
-    user=get_object_or_404(User, pk=id)
+    user = get_object_or_404(User, pk=id)
     context = {
-        'user':user
+        'user': user
     }
     return render(request, 'accounts/mypage.html', context)
+
+def my_likes(request, id):
+    user = get_object_or_404(User, pk=id)
+    profile = user.profile
+    likes = Like.objects.filter(user=profile).select_related('menu__store')  # 메뉴 + 음식점 정보
+    context = {
+        'likes': likes
+    }
+    return render(request, 'accounts/my_likes.html', context)
