@@ -156,9 +156,9 @@
   </div>
 
   <footer>
-    <img src="{% static 'img/nav_user.png' %}" alt="유저">
-    <img src="{% static 'img/nav_main.png' %}" alt="홈">
-    <img src="{% static 'img/nav_heart.png' %}" alt="찜">
+    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fa fa-user">mypage</i></a>
+    <a href="{% url 'search:home' %}"><i class="fa fa-home">home</i></a>
+    <a href="#"><i class="fa fa-map-marker-alt">stamp(기능X)</i></a>
   </footer>
 </body>
 </html>
