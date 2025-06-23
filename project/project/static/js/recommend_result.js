@@ -22,4 +22,4 @@ document.addEventListener('DOMContentLoaded', () => {
         priceText.innerText = currentPrice.toLocaleString() + '원';
       }
     });
-  });  
+  });

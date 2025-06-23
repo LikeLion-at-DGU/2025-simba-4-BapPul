@@ -1,61 +1,41 @@
-<style>
-    body {
-      background-color: #ff4d4d;
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
-      font-family: sans-serif;
-    }
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>오늘의 추천 메뉴</title>
+  <link rel="stylesheet" href="{% static 'css/search/random_result.css' %}">
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-    .menu-card {
-      background: white;
-      color: black;
-      width: 280px;
-      margin: 0 auto;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-      padding: 10px;
-    }
+</head>
+<body>
 
-    .menu-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
+  <!-- 뒤로가기 버튼 -->
+  <a href="{% url 'search:recommend_result' %}" class="back-button">
+    <iconify-icon icon="mdi:chevron-left" width="28" height="28"></iconify-icon>
+  </a>  
 
-    .menu-info {
-      padding: 10px;
-      text-align: left;
-    }
-
-    .menu-info strong {
-      font-size: 18px;
-    }
-
-    .meta {
-      color: gray;
-      font-size: 14px;
-    }
-  </style>
-
-<h2>오늘의 추천 메뉴</h2>
+  <h2 class="recommend-title">오늘의 추천 메뉴</h2>
 
   {% if menu %}
-  <div class="menu-card">
-    {% if menu.image %}
-      <img src="{{ menu.image.url }}" alt="메뉴 이미지">
-    {% else %}
-      <div style="width:100%; height:180px; background:#eee; border-radius:12px;"></div>
-    {% endif %}
+    <div class="menu-card">
+      {% if menu.image %}
+        <img src="{{ menu.image.url }}" alt="메뉴 이미지" class="menu-img">
+      {% else %}
+        <div class="menu-img-placeholder"></div>
+      {% endif %}
 
-    <div class="menu-info">
-      <strong>{{ menu.name }}</strong> <span class="meta">{{ menu.store.name }}</span><br>
-      <span class="meta">영업 중</span> &nbsp;
-      <span style="color:red;">★ 4.5</span> &nbsp;
-      <span class="meta">리뷰 999+</span>
+      <div class="menu-info">
+        <strong class="menu-name">{{ menu.name }}</strong>
+        <span class="meta">{{ menu.store.name }}</span><br>
+        <span class="meta">영업 중</span> &nbsp;
+        <span class="rating">★ 4.5</span> &nbsp;
+        <span class="meta">리뷰 999+</span>
+      </div>
     </div>
-  </div>
   {% else %}
     <p>조건에 맞는 메뉴가 없습니다.</p>
   {% endif %}
+
+</body>
+</html>

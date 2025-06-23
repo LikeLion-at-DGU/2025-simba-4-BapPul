@@ -4,6 +4,16 @@ body {
     background-color: #fff;
   }
   
+  .top-nav {
+    padding: 16px;
+  }
+  
+  .back-btn {
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+  }
+  
   .container {
     padding: 20px;
   }
@@ -11,7 +21,7 @@ body {
   .sub-title {
     text-align: center;
     font-size: 16px;
-    margin-top: 45px;
+    margin-top: 10px;
     margin-bottom: 20px;
   }
   

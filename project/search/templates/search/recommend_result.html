@@ -9,6 +9,13 @@
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
 <body>
+  <!-- 뒤로가기 버튼 -->
+  <div class="top-nav">
+    <a href="{% url 'search:home' %}" class="back-btn">
+      <iconify-icon icon="mdi:chevron-left" width="24" height="24"></iconify-icon>
+    </a>
+  </div>
+  
   <div class="container">
     <div class="price-header">
       <p class="sub-title">이 메뉴들은 어떠세요 ?</p>
@@ -25,6 +32,11 @@
           {{ cat }}
         </button>
       {% endfor %}
+      <!-- 랜덤 버튼 추가 -->
+      <a href="{% url 'search:random_wait' %}">
+        <button class="category-btn random-btn">랜덤</button>
+      </a>
+    
     </div>
 
     <!-- <div class="menu-grid">
