@@ -150,3 +150,13 @@ def edit_profile(request):
         'profile': profile
     }
     return render(request, 'accounts/edit_profile.html', context)
+
+# 프로필사진 업로드
+@login_required
+def upload_profile_image(request):
+    if request.method == 'POST':
+        image = request.FILES.get('profile_image')
+        if image:
+            request.user.profile.image = image
+            request.user.profile.save()
+    return redirect('accounts:mypage', request.user.id)
