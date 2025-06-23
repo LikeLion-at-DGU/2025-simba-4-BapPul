@@ -53,7 +53,8 @@ def recommend_result(request):
         if haversine(s.latitude, s.longitude, school.latitude, school.longitude) * 1000 <= radius
     ]
 
-    menus = Menu.objects.filter(store__id__in=nearby_ids, price__lte=price)
+    menus = Menu.objects.filter(store__id__in=nearby_ids, price__lte=price).order_by('-price')
+
 
     # 찜한 메뉴 id 모음
     liked_menu_ids = set(Like.objects.filter(user=profile).values_list('menu_id', flat=True))
@@ -75,7 +76,7 @@ def recommend_result(request):
         'price': price,
         'radius': radius,
         'selected_category': category_name,
-        'categories': ["한식", "일식", "중식", "양식", "분식", "기타"],
+        'categories': ["한식", "일식", "중식", "양식",  "기타"],
     })
 
 def like_menu(request, menu_id):
