@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>방문 기록</title>
+  <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+  <style>
+    body {
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    .visit-date {
+      font-weight: bold;
+      margin-top: 30px;
+      font-size: 16px;
+      color: #d33;
+    }
+    .visit-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      margin-top: 10px;
+      padding: 15px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .menu-thumb {
+      width: 80px;
+      height: 80px;
+      background-color: #ddd;
+      border-radius: 8px;
+    }
+    .menu-info {
+      flex-grow: 1;
+    }
+    .menu-name {
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+    }
+    .store-name {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+    .review-status {
+      font-size: 14px;
+      color: #e67e22;
+      margin-top: 4px;
+    }
+    .stars {
+      color: #f39c12;
+      font-size: 16px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📍 방문 기록</h2>
+
+  {% regroup visits by visited_at.date as visit_date_groups %}
+
+  {% for group in visit_date_groups %}
+    <div class="visit-date">{{ group.grouper|date:"Y년 m월 d일" }}</div>
+    {% for visit in group.list %}
+      <div class="visit-card">
+        <div class="menu-thumb">
+          {% if visit.menu.image %}
+            <img src="{{ visit.menu.image.url }}" alt="메뉴 이미지" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+          {% else %}
+            <!-- 대체 이미지 -->
+          {% endif %}
+        </div>
+        <div class="menu-info">
+          {% if visit.menu %}
+            <a href="{% url 'menu:store_detail' store_id=visit.store.id menu_id=visit.menu.id %}" class="menu-name">{{ visit.menu.name }}</a>
+            <div class="store-name">{{ visit.store.name }}</div>
+            {% if visit.reviewed %}
+              <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>  <!-- 실제로는 별점 가져와야 함 -->
+            {% else %}
+              <div class="review-status">✍ 리뷰 대기 중</div>
+            {% endif %}
+          {% else %}
+            <div class="menu-name">[삭제된 메뉴]</div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% empty %}
+    <p>아직 방문 기록이 없습니다.</p>
+  {% endfor %}
+
+  <div class="nav-bar">
+    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fa fa-user">mypage</i></a>
+    <a href="{% url 'search:home' %}"><i class="fa fa-home">home</i></a>
+    <a href="#"><i class="fa fa-map-marker-alt">stamp</i></a>
+  </div>
+</body>
+</html>
