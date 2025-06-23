@@ -7,6 +7,21 @@
   <title>추천 결과</title>
   <link rel="stylesheet" href="{% static 'css/search/recommend_result.css' %}">
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    a.menu-card {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      display: block;
+    }
+
+    a.menu-card:focus,
+    a.menu-card:active {
+      outline: none;
+      box-shadow: none;
+    }
+  </style>
+
 </head>
 <body>
   <!-- 뒤로가기 버튼 -->
@@ -27,24 +42,53 @@
     </div>
 
     <div class="category-filter">
-      {% for cat in categories %}
+    {% for cat in categories %}
+      <a href="?price={{ price }}&radius={{ radius }}&category={{ cat }}">
         <button class="category-btn {% if selected_category == cat %}active{% endif %}">
           {{ cat }}
         </button>
-      {% endfor %}
+      </a>
+    {% endfor %}
       <!-- 랜덤 버튼 추가 -->
-      <a href="{% url 'search:random_wait' %}">
-        <button class="category-btn random-btn">랜덤</button>
+      <a href="{% url 'search:random_wait' %}?price={{ price }}&radius={{ radius }}{% if selected_category %}&category={{ selected_category }}{% endif %}">
+      <button class="category-btn random-btn">랜덤</button>
       </a>
     
     </div>
 
-    <!-- <div class="menu-grid">
+    {% comment %} 클릭시 가게로 이동이 안되어있어서 수정함 <div class="menu-grid">
       {% for m in menus %}
         <div class="menu-card">
-          {% if forloop.first %}
+        <div class="menu-image">
+          {% if m.menu.image %}
+            <img src="{{ m.menu.image.url }}" alt="{{ m.menu.name }} 이미지" class="menu-img">
+          {% else %}
+            <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지" class="menu-img">
           {% endif %}
-          <div class="menu-image"></div>
+        </div>
+        <div class="menu-info">
+          <p class="menu-name"><strong>{{ m.menu.name }}</strong></p>
+          <p class="store-name">{{ m.menu.store.name }}</p>
+          <p class="menu-meta">
+            <span class="status">영업 중</span>
+            <span class="rating">★ {{ m.average_rating }}</span>
+            <span class="review">리뷰 {{ m.review_count }}+</span>
+          </p>
+        </div>
+      </div>
+
+      {% endfor %} {% endcomment %}
+
+      <div class="menu-grid">
+      {% for m in menus %}
+        <a href="{% url 'menu:store_detail' store_id=m.menu.store.id menu_id=m.menu.id %}" class="menu-card">
+          <div class="menu-image">
+            {% if m.menu.image %}
+              <img src="{{ m.menu.image.url }}" alt="{{ m.menu.name }} 이미지" class="menu-img">
+            {% else %}
+              <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지" class="menu-img">
+            {% endif %}
+          </div>
           <div class="menu-info">
             <p class="menu-name"><strong>{{ m.menu.name }}</strong></p>
             <p class="store-name">{{ m.menu.store.name }}</p>
@@ -54,12 +98,14 @@
               <span class="review">리뷰 {{ m.review_count }}+</span>
             </p>
           </div>
-        </div>
-      {% endfor %} -->
+        </a>
+      {% endfor %}
+      </div>
+
 
       <!-- 하드코딩된 카드 리스트 -->
 <!-- 메뉴카드 섹션: 배경이 빨간 영역 -->
-<div class="menu-section">
+{% comment %} {% comment %} <div class="menu-section">
   <div class="menu-grid">
     <!-- 하드코딩된 카드 리스트 -->
     <div class="menu-card">
@@ -91,7 +137,7 @@
         </p>
       </div>
     </div>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
 
     {% if menus|length == 0 %}
       <p class="no-result">조건에 맞는 결과가 없습니다.</p>
@@ -102,3 +148,33 @@
 
 </body>
 </html>
+
+<script>
+  const priceText = document.getElementById("price-text");
+  const decreaseBtn = document.querySelector(".price-box button:first-child");
+  const increaseBtn = document.querySelector(".price-box button:last-child");
+
+  // 현재 가격 추출
+  function getCurrentPrice() {
+    return parseInt(priceText.innerText.replace(/[^0-9]/g, ""));
+  }
+
+  // URL 쿼리 수정 함수
+  function moveToNewPrice(newPrice) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("price", newPrice); // price만 수정
+    window.location.href = url.toString();   // 새로고침 (서버 요청)
+  }
+
+  decreaseBtn.addEventListener("click", () => {
+    let price = getCurrentPrice();
+    if (price > 1000) {
+      moveToNewPrice(price - 1000);
+    }
+  });
+
+  increaseBtn.addEventListener("click", () => {
+    let price = getCurrentPrice();
+    moveToNewPrice(price + 1000);
+  });
+</script>

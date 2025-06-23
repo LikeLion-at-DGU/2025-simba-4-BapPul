@@ -40,8 +40,13 @@ def recommend_result(request):
     except Profile.DoesNotExist:
         return redirect('accounts:create_profile')
 
-    price = int(request.GET.get('price', 5000))
-    radius = int(request.GET.get('radius', 500))
+    # 🔒 안전한 변환
+    try:
+        price = int(request.GET.get('price', '5000'))
+        radius = int(request.GET.get('radius', '500'))
+    except ValueError:
+        return redirect('search:home')  # 잘못된 요청이면 홈으로 보내기
+
     category_name = request.GET.get('category')
 
     all_stores = Store.objects.filter(school=school)
@@ -53,16 +58,13 @@ def recommend_result(request):
         if haversine(s.latitude, s.longitude, school.latitude, school.longitude) * 1000 <= radius
     ]
 
-    menus = Menu.objects.filter(store__id__in=nearby_ids, price__lte=price)
+    menus = Menu.objects.filter(store__id__in=nearby_ids, price__lte=price).order_by('-price')
 
-    # 찜한 메뉴 id 모음
     liked_menu_ids = set(Like.objects.filter(user=profile).values_list('menu_id', flat=True))
 
-    # 메뉴 + 정보 묶기
     menu_data = []
     for menu in menus:
         store_reviews = Review.objects.filter(menu__store=menu.store)
-
         menu_data.append({
             'menu': menu,
             'liked': menu.id in liked_menu_ids,
@@ -75,7 +77,7 @@ def recommend_result(request):
         'price': price,
         'radius': radius,
         'selected_category': category_name,
-        'categories': ["한식", "일식", "중식", "양식", "분식", "기타"],
+        'categories': ["한식", "일식", "중식", "양식", "기타"],
     })
 
 def like_menu(request, menu_id):
@@ -115,26 +117,30 @@ def random_result(request):
     radius = int(request.GET.get('radius', 500))
     category = request.GET.get('category')
 
-    # 조건에 맞는 가게 필터링
     stores = Store.objects.filter(school=school)
     if category:
         stores = stores.filter(category__name=category)
 
-    # 반경 필터링
     nearby_store_ids = [
         store.id for store in stores
         if haversine(store.latitude, store.longitude, school.latitude, school.longitude) * 1000 <= radius
     ]
 
-    # 조건에 맞는 메뉴들 필터링
     menus = Menu.objects.filter(store__id__in=nearby_store_ids, price__lte=price)
 
     if not menus.exists():
-        return render(request, 'search/random_result.html', {'menu': None})
+        return render(request, 'search/random_result.html', {
+            'menu': None,
+            'price': price,
+            'radius': radius,
+            'category': category,
+        })
 
-    # 랜덤으로 하나 선택
     selected_menu = random.choice(list(menus))
 
     return render(request, 'search/random_result.html', {
-        'menu': selected_menu
+        'menu': selected_menu,
+        'price': price,
+        'radius': radius,
+        'category': category,
     })
