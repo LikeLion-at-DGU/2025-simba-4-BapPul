@@ -150,7 +150,9 @@
     <a href="{% url 'accounts:my_visits' request.user.id %}" style="text-decoration: none;">
       <div class="menu-item">방문 기록<span>›</span></div>
     </a>
-    <div class="menu-item">나의 리뷰 <span>›</span></div>
+    <a href="{% url 'accounts:my_reviews' request.user.id %}" style="text-decoration: none;">
+      <div class="menu-item">나의 리뷰<span>›</span></div>
+    </a>
   </div>
 
   <div class="nav-bar">
