@@ -1,0 +1,27 @@
+<h3>지금까지 주먹밥으로 모은 포인트: {{ total_point }} 🪙</h3>
+
+<div class="current-map">
+  <h4>밥지도 ({{ current_rice_map.created_at|date:"Y.m.d" }} 오픈)</h4>
+  <div class="grains-grid">
+    {% for grain in rice_grains %}
+      <div class="grain-box">🍚</div>
+    {% empty %}
+      <div>아직 밥풀이 없습니다.</div>
+    {% endfor %}
+  </div>
+</div>
+
+<hr>
+
+<p><span style="color:red">{{ request.user.profile.nickname }}</span>님 현재 주먹밥을 <b>{{ riceball_count }}</b>개 만들었어요!</p>
+
+<div class="riceball-history">
+  {% for map in past_rice_maps %}
+    <div class="riceball-box">
+      <p>{{ map.created_at|date:"Y/m/d" }} ~ {{ map.finished_at|date:"Y/m/d" }}</p>
+      <div class="img-placeholder">🍙</div>
+    </div>
+  {% empty %}
+    <p>완료된 밥지도가 없습니다.</p>
+  {% endfor %}
+</div>

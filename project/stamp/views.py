@@ -17,27 +17,35 @@ from stamp.models import RiceMap, RiceGrain, Riceball
 #     }
 #     return render(request, 'stamp/rice_map.html', context)
 
-#테스트할 때 로그인 안되도 접근 가능하게 하기 위해서
 def rice_map_main(request):
+    return render(request, 'stamp/rice_map_main.html')
+
+#테스트할 때 로그인 안되도 접근 가능하게 하기 위해서 일단!
+def rice_map(request):
     if not request.user.is_authenticated:
-        # 로그인 안 된 사용자에겐 빈 값 전달
-        context = {
+        return render(request, 'stamp/rice_map.html', {
             'rice_grains': [],
-            'riceballs': [],
+            'current_rice_map': None,
             'riceball_count': 0,
-        }
-        return render(request, 'stamp/rice_map.html', context)
+            'total_point': 0,
+            'past_rice_maps': [],
+        })
 
     user_profile = request.user.profile
-    rice_map, _ = RiceMap.objects.get_or_create(owner=user_profile)
+    current_rice_map = RiceMap.objects.filter(owner=user_profile).order_by('-created_at').first()
 
-    rice_grains = rice_map.rice_grains.order_by('created_at')
-    riceballs = rice_map.riceballs.order_by('-created_at')
+    rice_grains = current_rice_map.rice_grains.order_by('created_at')
+    riceballs = current_rice_map.riceballs.order_by('-created_at')
+
+    past_rice_maps = RiceMap.objects.filter(owner=user_profile).exclude(id=current_rice_map.id).order_by('-created_at')
 
     context = {
         'rice_grains': rice_grains,
+        'current_rice_map': current_rice_map,
         'riceballs': riceballs,
         'riceball_count': riceballs.count(),
+        'total_point': Riceball.objects.filter(rice_map__owner=user_profile).count() * 2000,
+        'past_rice_maps': past_rice_maps,
     }
-    return render(request, 'stamp/rice_map_main.html', context)
+    return render(request, 'stamp/rice_map.html', context)
 
