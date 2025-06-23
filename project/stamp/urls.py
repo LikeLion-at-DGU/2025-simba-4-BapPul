@@ -5,5 +5,5 @@ app_name = 'stamp'
 
 urlpatterns = [
     path('', views.rice_map_main, name='rice_map_main'),
-    path('map/', rice_map, name='rice_map'),
+    path('map/', views.rice_map, name='rice_map'),
 ]
