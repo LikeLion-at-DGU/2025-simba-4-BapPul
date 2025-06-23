@@ -24,7 +24,7 @@ def store_detail(request, store_id, menu_id):
         'menus': menus,
         'selected_menu': selected_menu,
         'recent_reviews': recent_reviews,
-        'avg_rating': round(stats['avg_rating'], 1) if stats['avg_rating'] else None,
+        'avg_rating': round(stats['avg_rating'], 1) if stats['avg_rating'] else 3.0,
         'review_count': stats['review_count'],
     })
 

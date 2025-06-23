@@ -15,18 +15,24 @@
 
 <body>
   <header>
-    <i class="fa-solid fa-chevron-left"></i>
+    <i class="fa-solid fa-chevron-left" onclick="history.back()" style="cursor: pointer;"></i>
     <p>상세정보</p>
     <p>ㅤ</p>
-  </header>
+    </header>
+
 
 
   <div class="store-container">
-    <img src="/media/store_images/store.png" alt="음식점 사진">
+    {% if store.image %}
+        <img src="{{ store.image.url }}" alt="{{ store.name }}">
+    {% else %}
+        <img src="{% static 'images/store_default.png' %}" alt="기본 가게 이미지">
+    {% endif %}
+
     <div class="store-name">
       <h2>{{ store.name }}</h2>
       <!--이거 음식종류 수정 필요-->
-      <p>음식 종류</p>
+      <p>{{ store.category.name }}</p>
     </div>
     <div class="store-review">
       <p id="store-status">영업중</p>
@@ -40,19 +46,19 @@
     <h3>정보</h3>
     <div class="info-detail">
       <i class="fa-solid fa-location-dot"></i>
-      <p>서울특별시 중구 필동로 1길30</p>
+      <p>{{ store.address }}</p>
     </div>
     <div class="info-detail">
       <i class="fa-solid fa-phone"></i>
-      <p>02-2260-3114</p>
+      <p>{{ store.number }}</p>
     </div>
-    <div class="info-detail">
+    {% comment %} <div class="info-detail">
       <i class="fa-solid fa-diamond-turn-right"></i>
       <p>4호선 충무로역 - 1번 출구 500미터</p>
-    </div>
+    </div> {% endcomment %}
     <div class="info-detail">
       <i class="fa-solid fa-clock"></i>
-      <p>영업 중 / 23:00에 영업 종료</p>
+      <p>{{ store.open_time }}</p>
     </div>
   </div>
 
@@ -69,7 +75,7 @@
             {% if menu.image %}
             <img src="{{ menu.image.url }}" alt="{{ menu.name }}">
             {% else %}
-            <img src="/media/menu_images/menu.png" alt="메뉴 이미지">
+            <img src="{% static 'images/menu_default.png' %}" alt="메뉴 이미지">
             {% endif %}
 
             <p>{{ menu.name }} / {{ menu.price }}원</p>
@@ -82,7 +88,7 @@
         <div class="review-bar">
           <p>ㅤㅤㅤㅤ</p>
           <h1>REVIEW</h1>
-          <a href="{{ store_review_list }}">+ 더보기</a>
+          <a href="{% url 'menu:store_review_list' store.id %}">+ 더보기</a>
         </div>
 
         <div class="reviews">
