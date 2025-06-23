@@ -50,13 +50,13 @@
       </a>
     {% endfor %}
       <!-- 랜덤 버튼 추가 -->
-      <a href="{% url 'search:random_wait' %}">
-        <button class="category-btn random-btn">랜덤</button>
+      <a href="{% url 'search:random_wait' %}?price={{ price }}&radius={{ radius }}{% if selected_category %}&category={{ selected_category }}{% endif %}">
+      <button class="category-btn random-btn">랜덤</button>
       </a>
     
     </div>
 
-    {% comment %} <div class="menu-grid">
+    {% comment %} 클릭시 가게로 이동이 안되어있어서 수정함 <div class="menu-grid">
       {% for m in menus %}
         <div class="menu-card">
         <div class="menu-image">

@@ -11,9 +11,9 @@
 <body>
 
   <!-- 뒤로가기 버튼 -->
-  <a href="{% url 'search:recommend_result' %}" class="back-button">
-    <iconify-icon icon="mdi:chevron-left" width="28" height="28"></iconify-icon>
-  </a>  
+  <a href="{% url 'search:recommend_result' %}?price={{ price }}&radius={{ radius }}{% if category %}&category={{ category }}{% endif %}" class="back-button">
+  <iconify-icon icon="mdi:chevron-left" width="28" height="28"></iconify-icon></a>
+
 
   <h2 class="recommend-title">오늘의 추천 메뉴</h2>
 
