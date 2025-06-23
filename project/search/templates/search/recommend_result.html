@@ -1,59 +1,91 @@
-<h2>{{ price }}원 이하 메뉴</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>추천 결과</title>
+  <link rel="stylesheet" href="{% static 'css/search/recommend_result.css' %}">
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="price-header">
+      <p class="sub-title">이 메뉴들은 어떠세요 ?</p>
+      <div class="price-box">
+        <button class="price-btn">-</button>
+        <span class="price-text">{{ price }}원</span>
+        <button class="price-btn">+</button>
+      </div>
+    </div>
 
-<!-- ✅ 카테고리 필터 -->
-<form method="get" action="{% url 'search:recommend_result' %}">
-  <input type="hidden" name="price" value="{{ price }}">
-  <input type="hidden" name="radius" value="{{ radius }}">
+    <div class="category-filter">
+      {% for cat in categories %}
+        <button class="category-btn {% if selected_category == cat %}active{% endif %}">
+          {{ cat }}
+        </button>
+      {% endfor %}
+    </div>
 
-  <select name="category">
-    <option value="">전체</option>
-    {% for cat in categories %}
-      <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+    <!-- <div class="menu-grid">
+      {% for m in menus %}
+        <div class="menu-card">
+          {% if forloop.first %}
+          {% endif %}
+          <div class="menu-image"></div>
+          <div class="menu-info">
+            <p class="menu-name"><strong>{{ m.menu.name }}</strong></p>
+            <p class="store-name">{{ m.menu.store.name }}</p>
+            <p class="menu-meta">
+              <span class="status">영업 중</span>
+              <span class="rating">★ {{ m.average_rating }}</span>
+              <span class="review">리뷰 {{ m.review_count }}+</span>
+            </p>
+          </div>
+        </div>
+      {% endfor %} -->
+
+      <!-- 하드코딩된 카드 리스트 -->
+<!-- 메뉴카드 섹션: 배경이 빨간 영역 -->
+<div class="menu-section">
+  <div class="menu-grid">
+    <!-- 하드코딩된 카드 리스트 -->
+    <div class="menu-card">
+      <div class="menu-image">
+        <img src="/media/menu_images/menu.png" alt="menu image" class="menu-img">
+      </div>
+      <div class="menu-info">
+        <p class="menu-name"><strong>메뉴 이름</strong></p>
+        <p class="store-name">음식점 이름</p>
+        <p class="menu-meta">
+          <span class="status">영업 중</span>
+          <span class="rating">★ 4.5</span>
+          <span class="review">리뷰 999+</span>
+        </p>
+      </div>
+    </div>
+    {% for i in "12345" %}
+    <div class="menu-card">
+      <div class="menu-image">
+        <img src="/media/menu_images/menu.png" alt="menu image" class="menu-img">
+      </div>
+      <div class="menu-info">
+        <p class="menu-name"><strong>메뉴 이름</strong></p>
+        <p class="store-name">음식점 이름</p>
+        <p class="menu-meta">
+          <span class="status">영업 중</span>
+          <span class="rating">★ 4.5</span>
+          <span class="review">리뷰 999+</span>
+        </p>
+      </div>
+    </div>
     {% endfor %}
-  </select>
 
-  <button type="submit">적용</button>
-</form>
+    {% if menus|length == 0 %}
+      <p class="no-result">조건에 맞는 결과가 없습니다.</p>
+    {% endif %}
+  </div>
+</div>
 
-<hr>
-
-<!-- ✅ 랜덤 추천 -->
-<form method="get" action="{% url 'search:random_wait' %}" style="margin-top: 10px;">
-  <input type="hidden" name="price" value="{{ price }}">
-  <input type="hidden" name="radius" value="{{ radius }}">
-  {% if selected_category %}
-    <input type="hidden" name="category" value="{{ selected_category }}">
-  {% endif %}
-  <button type="submit">🎲 랜덤 추천</button>
-</form>
-
-<hr>
-
-<!-- ✅ 메뉴 리스트 -->
-{% if menus %}
-  <ul>
-    {% for m in menus %}
-      <li style="margin-bottom: 20px;">
-        <a href="{% url 'menu:store_detail' store_id=m.menu.store.id menu_id=m.menu.id %}">
-          <strong>{{ m.menu.name }}</strong> - {{ m.menu.price }}원<br>
-          가게: {{ m.menu.store.name }}<br>
-          ⭐ 평균 별점: {{ m.average_rating }} / 리뷰: {{ m.review_count }}개
-        </a>
-
-        <!-- 찜 버튼 -->
-        <form method="post" action="{% url 'search:like_menu' m.menu.id %}" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" style="border: none; background: none; font-size: 20px; cursor: pointer;">
-            {% if m.liked %}
-              <span title="찜함">⭐</span>
-            {% else %}
-              <span title="찜 안함">☆</span>
-            {% endif %}
-          </button>
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>조건에 맞는 메뉴가 없습니다.</p>
-{% endif %}
+</body>
+</html>
