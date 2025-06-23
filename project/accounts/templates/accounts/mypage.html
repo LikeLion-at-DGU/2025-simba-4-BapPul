@@ -161,7 +161,12 @@
   <div class="mypage-header">
     <div class="user-info">
       <p class="school">{{ user.profile.school.name }}</p>
-      <h2>{{ user.username }} 님 <i class="fa fa-user-circle"></i></h2>
+      <h2>
+        {{ user.username }} 님 <i class="fa fa-user-circle"></i>
+        <a href="{% url 'accounts:edit_profile' %}" style="text-decoration: none; color: white;">
+          ✏️
+        </a>
+      </h2>
       <p>주먹밥 개수 🍙 <strong>{{ riceball_count }}개</strong></p>
     </div>
   </div>
