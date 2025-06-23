@@ -208,7 +208,7 @@
   <div class="nav-bar">
     <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fa fa-user">mypage</i></a>
     <a href="{% url 'search:home' %}"><i class="fa fa-home">home</i></a>
-    <a href="#"><i class="fa fa-map-marker-alt">stamp(기능X)</i></a>
+    <a href="{% url 'stamp:rice_map' %}"><i class="fa fa-map-marker-alt">stamp(기능 구현)</i></a>
   </div>
 
 </body>
