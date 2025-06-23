@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from .models import Profile
 from search.models import School
 from menu.models import Like, VisitLog, Review
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def login(request):
@@ -110,3 +112,35 @@ def my_reviews(request, id):
         'reviews': reviews
     }
     return render(request, 'accounts/my_reviews.html', context)
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    profile = user.profile
+
+    if request.method == 'POST':
+        nickname = request.POST.get('nickname')
+        password = request.POST.get('password')
+        confirm = request.POST.get('confirm')
+
+        if password and password != confirm:
+            messages.error(request, '비밀번호가 일치하지 않습니다.')
+            return redirect('accounts:edit_profile')
+
+        if password:
+            user.set_password(password)
+            user.save()
+            auth.login(request, user)  # 비번 바꾸면 재로그인 필요
+
+        if nickname:
+            profile.nickname = nickname
+            profile.save()
+
+        messages.success(request, '정보가 성공적으로 수정되었습니다.')
+        return redirect('accounts:mypage', id=user.id)
+
+    context = {
+        'user': user,
+        'profile': profile
+    }
+    return render(request, 'accounts/edit_profile.html', context)
