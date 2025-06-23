@@ -14,7 +14,7 @@
       <p class="sub-title">이 메뉴들은 어떠세요 ?</p>
       <div class="price-box">
         <button class="price-btn">-</button>
-        <span class="price-text">{{ price }}원</span>
+        <span class="price-text" id="price-text">{{ price }}원</span>
         <button class="price-btn">+</button>
       </div>
     </div>
@@ -86,6 +86,7 @@
     {% endif %}
   </div>
 </div>
+<script src="{% static 'js/recommend_result.js' %}"></script>
 
 </body>
 </html>
