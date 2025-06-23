@@ -3,7 +3,7 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
 <nav class="navbar-container">
-  <a class="navbar-link" href="{% url 'accounts:mypage' %}">
+  <a class="navbar-link" href="{% url 'accounts:mypage' request.user.id %}">
     <iconify-icon icon="icon-park-solid:people" width="24" height="24"></iconify-icon>
     <div class="nav-label">마이페이지</div>
   </a>
