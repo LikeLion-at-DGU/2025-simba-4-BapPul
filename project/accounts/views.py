@@ -67,12 +67,12 @@ def signup(request):
     schools = School.objects.all()
     return render(request, 'accounts/signup.html', {'schools': schools})
 
-def mypage(request):
-    user = request.user
+def mypage(request, id):
+    user = get_object_or_404(User, id=id)
     profile = user.profile
 
     # 주먹밥 개수 계산
-    riceball_count = Riceball.objects.filter(rice_map__owner=user.profile).count()
+    riceball_count = Riceball.objects.filter(rice_map__owner=profile).count()
 
     # 최근 방문 중 아직 리뷰가 없는 메뉴 1개 가져오기
     latest_review = (
@@ -85,7 +85,9 @@ def mypage(request):
 
     context = {
         'user': user,
-        'latest_review': latest_review  # ➕ context에 추가
+        'profile': profile,
+        'riceball_count': riceball_count,
+        'latest_review': latest_review,
     }
     return render(request, 'accounts/mypage.html', context)
 
