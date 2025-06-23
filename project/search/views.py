@@ -26,7 +26,7 @@ def search(request):
     school = user.profile.school
     radius = int(request.GET.get('radius', 500))  # 기본값 500m 설정
 
-    return render(request, 'search/main.html', {
+    return render(request, 'project/home.html', {
         'school': school,
         'radius': radius,
     })
