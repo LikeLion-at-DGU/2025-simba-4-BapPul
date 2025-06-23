@@ -11,4 +11,5 @@ urlpatterns = [
   path('mypage/<int:id>', mypage, name='mypage'),
   path('mypage/<int:id>/likes/', my_likes, name='my_likes'),
   path('mypage/<int:id>/visits', my_visits, name='my_visits'),
+  path('mypage/<int:id>/reviews', my_reviews, name='my_reviews'),
 ]

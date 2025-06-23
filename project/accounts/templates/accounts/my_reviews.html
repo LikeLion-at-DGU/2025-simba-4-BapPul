@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>나의 리뷰</title>
+  <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
+  <style>
+    .review-container {
+      margin: 20px;
+    }
+    .review-item {
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+    }
+    .review-title {
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+    .review-subtitle {
+      color: #777;
+      font-size: 14px;
+    }
+    .review-date {
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+    .review-stars {
+      color: red;
+      font-size: 16px;
+    }
+    .review-image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="margin: 20px;">📝 나의 리뷰</h2>
+
+  <div class="review-container">
+    {% for review in reviews %}
+    <div class="review-item">
+      <div class="review-title">{{ review.menu.name }} - {{ review.menu.store.name }}</div>
+      <div class="review-stars">
+        {% for i in "12345"|slice:":" %}
+          {% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}
+        {% endfor %}
+      </div>
+      <div class="review-date">작성일 {{ review.created_at }}</div>
+      <div class="review-subtitle">{{ review.content }}</div>
+      {% if review.image %}
+        <img class="review-image" src="{{ review.image.url }}" alt="리뷰 이미지">
+      {% endif %}
+    </div>
+    {% empty %}
+    <p style="margin: 20px;">작성한 리뷰가 없습니다.</p>
+    {% endfor %}
+  </div>
+
+  <div class="nav-bar">
+    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fa fa-user">mypage</i></a>
+    <a href="{% url 'search:home' %}"><i class="fa fa-home">home</i></a>
+    <a href="#"><i class="fa fa-map-marker-alt">stamp(기능X)</i></a>
+  </div>
+</body>
+</html>

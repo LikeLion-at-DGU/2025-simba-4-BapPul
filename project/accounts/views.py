@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile
 from search.models import School
-from menu.models import Like, VisitLog
+from menu.models import Like, VisitLog, Review
 
 # Create your views here.
 def login(request):
@@ -88,3 +88,12 @@ def my_visits(request, id):
         'visits': visits
     }
     return render(request, 'accounts/my_visits.html', context)
+
+def my_reviews(request, id):
+    user = get_object_or_404(User, pk=id)
+    profile = user.profile
+    reviews = Review.objects.filter(writer=profile).select_related('menu__store').order_by('-created_at')
+    context = {
+        'reviews': reviews
+    }
+    return render(request, 'accounts/my_reviews.html', context)
