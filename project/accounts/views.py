@@ -67,8 +67,8 @@ def signup(request):
     schools = School.objects.all()
     return render(request, 'accounts/signup.html', {'schools': schools})
 
-def mypage(request, id):
-    user = get_object_or_404(User, pk=id)
+def mypage(request):
+    user = request.user
     profile = user.profile
 
     # 주먹밥 개수 계산
