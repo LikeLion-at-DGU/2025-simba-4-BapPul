@@ -66,10 +66,23 @@ def signup(request):
 
 def mypage(request, id):
     user = get_object_or_404(User, pk=id)
+    profile = user.profile
+
+    # 최근 방문 중 아직 리뷰가 없는 메뉴 1개 가져오기
+    latest_review = (
+        VisitLog.objects
+        .filter(user=profile, reviewed=False, menu__isnull=False)
+        .select_related('menu', 'store')
+        .order_by('-visited_at')
+        .first()
+    )
+
     context = {
-        'user': user
+        'user': user,
+        'latest_review': latest_review  # ➕ context에 추가
     }
     return render(request, 'accounts/mypage.html', context)
+
 
 def my_likes(request, id):
     user = get_object_or_404(User, pk=id)
