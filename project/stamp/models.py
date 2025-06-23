@@ -5,6 +5,7 @@ from menu.models import Review
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 class RiceMap(models.Model):
     #유저별 밥지도
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='rice_maps')
