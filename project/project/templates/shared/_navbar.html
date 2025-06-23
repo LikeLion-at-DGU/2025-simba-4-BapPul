@@ -1,7 +1,20 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/_navbar.css' %}">
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-<nav class="" navbar-container">
-    <a class="navbar-link" href="{% url 'accounts:mypage' %}">
-        <iconify-icon icon="icon-park-solid:people"></iconify-icon>
-    </a>
+<nav class="navbar-container">
+  <a class="navbar-link" href="{% url 'accounts:mypage' %}">
+    <iconify-icon icon="icon-park-solid:people" width="24" height="24"></iconify-icon>
+    <div class="nav-label">마이페이지</div>
+  </a>
+
+  <a class="navbar-link" href="{% url 'menu:search' %}">
+    <iconify-icon icon="material-symbols:fork-spoon" width="24" height="24"></iconify-icon>
+    <div class="nav-label">음식검색</div>
+  </a>
+
+  <a class="navbar-link" href="#">
+    <iconify-icon icon="mdi:map" width="24" height="24"></iconify-icon>
+    <div class="nav-label">밥지도</div>
+  </a>
 </nav>

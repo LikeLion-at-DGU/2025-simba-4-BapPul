@@ -8,3 +8,8 @@ def root_redirect_view(request):
         #return redirect('search:home')  # 로그인한 경우
     #else:
         #return redirect('accounts:start')  # 로그인 안 한 경우
+
+def home_view(request):
+    return render(request, 'home.html')
+
+
