@@ -27,10 +27,11 @@
   <!-- 검색부분 -->
   <div class="search-section">
     <p class="input-label">지금 가진 금액을 입력해주세요!</p>
-    <div class="search-input-group">
-      <input type="text" class="amount-input" placeholder="예) 5000원">
-      <button class="search-button">검색</button>
-    </div>
+    <form method="get" action="{% url 'search:recommend_result' %}">
+      <input type="text" name="price" class="amount-input" placeholder="예) 5000원">
+      <button type="submit" class="search-button">검색</button>
+    </form>
+    
   </div>
 
   <!-- 인기 있는 메뉴 (광고) -->
