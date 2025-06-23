@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="{% static 'css/store_detail.css' %}">
+  <link rel="stylesheet" href="{% static 'css/menu/store_detail.css' %}">
 
 </head>
 
@@ -25,6 +25,7 @@
     <img src="/media/store_images/store.png" alt="음식점 사진">
     <div class="store-name">
       <h2>{{ store.name }}</h2>
+      <!--이거 음식종류 수정 필요-->
       <p>음식 종류</p>
     </div>
     <div class="store-review">
@@ -81,7 +82,7 @@
         <div class="review-bar">
           <p>ㅤㅤㅤㅤ</p>
           <h1>REVIEW</h1>
-          <a href="#">+ 더보기</a>
+          <a href="{{ store_review_list }}">+ 더보기</a>
         </div>
 
         <div class="reviews">

@@ -1,17 +1,63 @@
-<h2>{{ store.name }} - 전체 리뷰</h2>
+{% load static %}
 
-<ul>
-  {% for review in reviews %}
-    <li>
-      <strong>🍽 {{ review.menu.name }}</strong><br>
-      ⭐ {{ review.rating }}점 - {{ review.content }}<br>
-      {{ review.writer.nickname }} / {{ review.created_at }}<br>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/menu/store_review_list.css' %}">
+</head>
+
+<body>
+  <header>
+    <i class="fa-solid fa-chevron-left"></i>
+    <p>다른 유저들의 리뷰</p>
+    <p>ㅤ</p>
+  </header>
+
+  <div class="bar">
+    <h1>{{ store.name }}</h1>
+    <hr>
+  </div>
+
+  <div class="review-container">
+    {% for review in reviews %}
+    <div class="review-card">
+      <div class="info">
+        <div class="name">
+          <div class="realname">
+            <p style="font-size: 12px; color: #8A8A8A;">
+              <strong style="color:#FF4C4F; font-size: 15px;">{{ review.menu.name }}</strong> {{ review.writer.nickname }}
+            </p>
+            
+          </div>
+          <p id="date">작성일 {{ review.created_at|date:"Y.m.d" }}</p>
+          
+        </div>
+
+        <!-- 별점 -->
+        <div class="stars">
+          {% for i in "12345" %}
+          {% if forloop.counter <= review.rating %} <span style="color: red;">★</span>
+            {% else %}
+            <span style="color: lightgray;">★</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+      </div>
+
 
       {% if review.image %}
-        <img src="{{ review.image.url }}" alt="리뷰 사진" width="200"><br>
+      <img src="{{ review.image.url }}" alt="리뷰 이미지" class="review-image">
       {% endif %}
-    </li>
-  {% empty %}
-    <li>아직 리뷰가 없습니다.</li>
-  {% endfor %}
-</ul>
+    </div>
+    {% endfor %}
+  </div>
+
+
+</body>
+
+</html>
