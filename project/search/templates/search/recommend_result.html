@@ -32,6 +32,11 @@
           {{ cat }}
         </button>
       {% endfor %}
+      <!-- 랜덤 버튼 추가 -->
+      <a href="{% url 'search:random_wait' %}">
+        <button class="category-btn random-btn">랜덤</button>
+      </a>
+    
     </div>
 
     <!-- <div class="menu-grid">
