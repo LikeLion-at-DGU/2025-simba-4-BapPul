@@ -79,4 +79,9 @@ body {
     font-size: 14px;
     font-weight: bold;
   }
-  
+  .menu-card-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  width: 100%; /* 카드 너비 다 감싸도록 */
+}

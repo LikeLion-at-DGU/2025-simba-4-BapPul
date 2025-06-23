@@ -17,25 +17,24 @@
 
   <h2 class="recommend-title">오늘의 추천 메뉴</h2>
 
-  {% if menu %}
-    <div class="menu-card">
-      {% if menu.image %}
-        <img src="{{ menu.image.url }}" alt="메뉴 이미지" class="menu-img">
-      {% else %}
-        <div class="menu-img-placeholder"></div>
-      {% endif %}
+  <a href="{% url 'menu:store_detail' menu.store.id menu.id %}" class="menu-card-link">
+  <div class="menu-card">
+    {% if menu.image %}
+      <img src="{{ menu.image.url }}" alt="메뉴 이미지" class="menu-img">
+    {% else %}
+      <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지" class="menu-img">
+    {% endif %}
 
-      <div class="menu-info">
-        <strong class="menu-name">{{ menu.name }}</strong>
-        <span class="meta">{{ menu.store.name }}</span><br>
-        <span class="meta">영업 중</span> &nbsp;
-        <span class="rating">★ 4.5</span> &nbsp;
-        <span class="meta">리뷰 999+</span>
-      </div>
+    <div class="menu-info">
+      <strong class="menu-name">{{ menu.name }}</strong>
+      <span class="meta">{{ menu.store.name }}</span><br>
+      <span class="meta">영업 중</span> &nbsp;
+      <span class="rating">★ 4.5</span> &nbsp;
+      <span class="meta">리뷰 999+</span>
     </div>
-  {% else %}
-    <p>조건에 맞는 메뉴가 없습니다.</p>
-  {% endif %}
+  </div>
+</a>
+
 
 </body>
 </html>
