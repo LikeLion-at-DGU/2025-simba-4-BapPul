@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  /* 헤더 */
+  .header {
+    background-color: #ff5050;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 5px;
+  }
+  
+  .range-btn {
+    background-color: white;
+    color: #ff5050;
+    border: none;
+    border-radius: 18px;
+    padding: 5px 10px;
+    font-size: 12px;
+    height: 24px;
+  }
+  
+
+  .main-title {
+    font-size: 32px;
+    color: #ff5050;
+    margin: 108px 30px 59px;
+  }
+  
+  /* 검색하는부분 */
+  .search-section {
+    margin: 0 auto;
+    margin-bottom: 78px;
+  }
+  
+  .input-label {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .search-input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+  }
+  
+  .amount-input {
+    width: 60%;
+    padding: 10px;
+    border: 2px solid #ff5050;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .search-button {
+    background-color: #ff5050;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  /* 인기 메뉴 (광고)*/
+  .hot-menu {
+    margin-top: 32px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .menu-card-placeholder {
+    width: 70%;
+    height: 205px;
+    background-color: #ddd;
+    border-radius: 20px;
+    margin: 10px auto 60px;
+  }
+  
+  /* 하단 바 여백 확보 */
+  body {
+    padding-bottom: 80px;
+  }
+  
