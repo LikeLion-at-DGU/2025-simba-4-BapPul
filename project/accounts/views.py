@@ -6,6 +6,7 @@ from search.models import School
 from menu.models import Like, VisitLog, Review
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from stamp.models import Riceball
 
 # Create your views here.
 def login(request):
@@ -69,6 +70,9 @@ def signup(request):
 def mypage(request, id):
     user = get_object_or_404(User, pk=id)
     profile = user.profile
+
+    # 주먹밥 개수 계산
+    riceball_count = Riceball.objects.filter(rice_map__owner=user.profile).count()
 
     # 최근 방문 중 아직 리뷰가 없는 메뉴 1개 가져오기
     latest_review = (
