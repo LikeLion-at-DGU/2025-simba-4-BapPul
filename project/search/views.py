@@ -4,6 +4,7 @@ from menu.models import Store, Menu, Review , Like
 from accounts.models import Profile
 from search.models import School
 from math import radians, cos, sin, asin, sqrt
+import random
 
 def haversine(lat1, lon1, lat2, lon2):
     # 거리 계산 함수
@@ -91,8 +92,17 @@ def like_menu(request, menu_id):
         return redirect(request.META.get('HTTP_REFERER', 'search:recommend_result'))
 
 
-def random(request):
-    return render(request, 'search/random.html')
+def random_wait(request):
+    price = int(request.GET.get('price', 5000))
+    radius = int(request.GET.get('radius', 500))
+    category = request.GET.get('category')
+
+    return render(request, 'search/random_wait.html', {
+        'price': price,
+        'radius': radius,
+        'category': category,
+    })
+
 
 def random_result(request):
     user = request.user
