@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import rice_map
+from . import views
 
 app_name = 'stamp'
 
 urlpatterns = [
-    path('rice-map/', rice_map, name='rice_map'),
+    path('', views.rice_map_main, name='rice_map_main'),
+    path('map/', rice_map, name='rice_map'),
 ]
