@@ -1,5 +1,6 @@
 <h2>{{ price }}원 이하 메뉴</h2>
 
+<!-- ✅ 카테고리 필터 -->
 <form method="get" action="{% url 'search:recommend_result' %}">
   <input type="hidden" name="price" value="{{ price }}">
   <input type="hidden" name="radius" value="{{ radius }}">
@@ -15,7 +16,8 @@
 </form>
 
 <hr>
-<!-- ✅ 랜덤 추천 폼 -->
+
+<!-- ✅ 랜덤 추천 -->
 <form method="get" action="{% url 'search:random' %}" style="margin-top: 10px;">
   <input type="hidden" name="price" value="{{ price }}">
   <input type="hidden" name="radius" value="{{ radius }}">
@@ -25,15 +27,30 @@
   <button type="submit">🎲 랜덤 추천</button>
 </form>
 
-<!-- ✅ 실제 메뉴 출력 -->
+<hr>
+
+<!-- ✅ 메뉴 리스트 -->
 {% if menus %}
   <ul>
-    {% for menu in menus %}
-      <li>
-      <a href="{% url 'menu:store_detail' store_id=menu.store.id menu_id=menu.id %}">
-        <strong>{{ menu.name }}</strong> - {{ menu.price }}원 <br>
-        가게: {{ menu.store.name }}
-      </a>
+    {% for m in menus %}
+      <li style="margin-bottom: 20px;">
+        <a href="{% url 'menu:store_detail' store_id=m.menu.store.id menu_id=m.menu.id %}">
+          <strong>{{ m.menu.name }}</strong> - {{ m.menu.price }}원<br>
+          가게: {{ m.menu.store.name }}<br>
+          ⭐ 평균 별점: {{ m.average_rating }} / 리뷰: {{ m.review_count }}개
+        </a>
+
+        <!-- 찜 버튼 -->
+        <form method="post" action="{% url 'search:like_menu' m.menu.id %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" style="border: none; background: none; font-size: 20px; cursor: pointer;">
+            {% if m.liked %}
+              <span title="찜함">⭐</span>
+            {% else %}
+              <span title="찜 안함">☆</span>
+            {% endif %}
+          </button>
+        </form>
       </li>
     {% endfor %}
   </ul>

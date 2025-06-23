@@ -13,5 +13,5 @@ urlpatterns = [
   path('mypage/<int:id>/visits', my_visits, name='my_visits'),
   path('mypage/<int:id>/reviews', my_reviews, name='my_reviews'),
   path('edit-profile/', edit_profile, name='edit_profile'),
-  path('mypage/<int:id>/rice-map/', rice_map_view, name='rice_map'),
+  #path('mypage/<int:id>/rice-map/', rice_map_view, name='rice_map'),
 ]

@@ -24,11 +24,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', root_redirect_view, name='root'),
-    path('accounts/', include('accounts.urls')),
-    path('search/', include('search.urls')),
-    path('menu/', include('menu.urls')),
     path('home/', views.home_view, name='home'),
-    path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('menu/', include('menu.urls')),
     path('search/', include('search.urls')),

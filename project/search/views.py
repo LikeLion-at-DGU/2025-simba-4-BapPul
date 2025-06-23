@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from menu.models import Store, Menu
+from django.shortcuts import render, redirect , get_object_or_404
+from django.db.models import Avg
+from menu.models import Store, Menu, Review , Like
 from accounts.models import Profile
 from search.models import School
 from math import radians, cos, sin, asin, sqrt
@@ -33,16 +34,17 @@ def search(request):
 def recommend_result(request):
     user = request.user
     try:
-        school = user.profile.school
+        profile = user.profile
+        school = profile.school
     except Profile.DoesNotExist:
         return redirect('accounts:create_profile')
 
     price = int(request.GET.get('price', 5000))
     radius = int(request.GET.get('radius', 500))
-    category_name = request.GET.get('category')  # 문자열 e.g. "한식"
+    category_name = request.GET.get('category')
 
     all_stores = Store.objects.filter(school=school)
-    if category_name:  #  선택된 카테고리 있을 때만 필터
+    if category_name:
         all_stores = all_stores.filter(category__name=category_name)
 
     nearby_ids = [
@@ -52,13 +54,42 @@ def recommend_result(request):
 
     menus = Menu.objects.filter(store__id__in=nearby_ids, price__lte=price)
 
+    # 찜한 메뉴 id 모음
+    liked_menu_ids = set(Like.objects.filter(user=profile).values_list('menu_id', flat=True))
+
+    # 메뉴 + 정보 묶기
+    menu_data = []
+    for menu in menus:
+        store_reviews = Review.objects.filter(menu__store=menu.store)
+
+        menu_data.append({
+            'menu': menu,
+            'liked': menu.id in liked_menu_ids,
+            'review_count': store_reviews.count(),
+            'average_rating': round(store_reviews.aggregate(avg=Avg('rating'))['avg'] or 0, 1),
+        })
+
     return render(request, 'search/recommend_result.html', {
-        'menus': menus,
+        'menus': menu_data,
         'price': price,
         'radius': radius,
         'selected_category': category_name,
-        'categories': ["한식", "일식", "중식", "양식", "분식", "기타"],  # 이건 Category 테이블에서 불러오게도 가능
+        'categories': ["한식", "일식", "중식", "양식", "분식", "기타"],
     })
+
+def like_menu(request, menu_id):
+    if request.method == 'POST':
+        profile = request.user.profile
+        menu = get_object_or_404(Menu, id=menu_id)
+
+        like = Like.objects.filter(user=profile, menu=menu).first()
+        if like:
+            like.delete()  # 찜 취소
+        else:
+            Like.objects.create(user=profile, menu=menu)  # 찜 등록
+
+        return redirect(request.META.get('HTTP_REFERER', 'search:recommend_result'))
+
 
 def random(request):
     return render(request, 'search/random.html')
