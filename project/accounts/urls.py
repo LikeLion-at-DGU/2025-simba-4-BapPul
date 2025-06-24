@@ -13,7 +13,8 @@ urlpatterns = [
   path('mypage/<int:id>/visits', my_visits, name='my_visits'),
   path('mypage/<int:id>/reviews', my_reviews, name='my_reviews'),
   path('edit-profile/', edit_profile, name='edit_profile'),
-path('upload-profile/', upload_profile_image, name='upload_profile_image'), #프로필사진 업로드
+  path('unlike/<int:menu_id>/', unlike_menu, name='unlike_menu'),
+#path('upload-profile/', upload_profile_image, name='upload_profile_image'), #프로필사진 업로드
 
   #path('mypage/<int:id>/rice-map/', rice_map_view, name='rice_map'),
 ]

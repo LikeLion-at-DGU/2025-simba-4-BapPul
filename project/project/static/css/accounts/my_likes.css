@@ -103,3 +103,8 @@
   .like-icon.active {
     color: #FF4C4F;
   }
+
+  a {
+  text-decoration: none;
+  color: inherit;
+}

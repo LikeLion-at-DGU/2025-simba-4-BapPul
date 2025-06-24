@@ -15,7 +15,7 @@
   </div>
 
   <!-- 이부분 나중에 활성화 시켜야 함 -->
-  <!-- <div class="container">
+  <div class="container">
     {% regroup visits by visited_at.date as grouped_visits %}
   {% for group in grouped_visits %}
     <div class="visit-section">
@@ -46,12 +46,12 @@
     <p>아직 방문 기록이 없습니다.</p>
   {% endfor %} 
   </div>
--->
+
 
 
    <!-- 여기부터 하드코딩 -->
 
-<!-- 방문 날짜 1 -->
+{% comment %} <!-- 방문 날짜 1 -->
 <div class="container">
   <div class="visit-section">
     <div class="visit-date">2025.06.15</div>
@@ -210,7 +210,7 @@
     </div>
   </div>
 </div>
-<!-- 여기까지 하드코딩 -->
+<!-- 여기까지 하드코딩 --> {% endcomment %}
 
 
   <script>

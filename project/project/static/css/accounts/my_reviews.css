@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+  }
+
+  .page-header {
+    position: relative;
+    padding: 16px 0;
+    text-align: center;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 18px;
+    color: #ff4c4f;
+    text-decoration: none;
+  }
+
+  .page-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff4c4f;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  .review-container {
+    padding: 20px;
+    width: 80%;      /* 원하는 최대 가로 길이 */
+    margin: 0 auto; 
+    
+  }
+
+  .review-item {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .review-plain {
+    display: flex;
+    gap: 12px;
+    align-items: center;  /* 핵심 변경 */
+  }
+  
+
+  .review-thumbnail {
+    width: 90px;
+  height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background-color: #eee;
+  }
+
+  .review-plain-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .review-stars {
+    color: #ff4c4f;
+    font-size: 16px;
+    margin: 4px 0;
+  }
+
+  .review-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: #ff4c4f;
+    margin-bottom: 2px;
+  }
+
+  .review-sub {
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .review-date {
+    font-size: 12px;
+    color: #666;
+  }

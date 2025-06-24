@@ -36,9 +36,10 @@ def rice_map_main(request):
 #     }
 #     return render(request, 'stamp/rice_map.html', context)
 
-# ===== 너가 원하는 최종 코드 =====
 
-@login_required(login_url='/accounts/login/')  # 비로그인 시 로그인 페이지로 리다이렉트
+# ===== 최종 반영 코드 (login_required + 예외 처리 포함) =====
+
+@login_required(login_url='/accounts/login/')
 def rice_map(request):
     user_profile = request.user.profile
     current_rice_map = RiceMap.objects.filter(owner=user_profile).order_by('-created_at').first()
