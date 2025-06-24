@@ -11,3 +11,17 @@ document.getElementById("price-form").addEventListener("submit", function (e) {
     }
   });
 
+  function toggleDropdown() {
+    const options = document.getElementById("radius-options");
+    options.style.display = options.style.display === "block" ? "none" : "block";
+  }
+  
+  document.addEventListener("click", function (event) {
+    const dropdown = document.querySelector(".radius-dropdown");
+    const options = document.getElementById("radius-options");
+    if (!dropdown.contains(event.target)) {
+      options.style.display = "none";
+    }
+  });
+  
+
