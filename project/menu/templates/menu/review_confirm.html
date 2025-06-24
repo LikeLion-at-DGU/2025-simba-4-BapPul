@@ -13,76 +13,40 @@
 
 <body>
   <header>
-    <i class="fa-solid fa-chevron-left"></i>
+    <i class="fa-solid fa-chevron-left" a="#"></i>
     <p>리뷰</p>
     <p>ㅤ</p>
   </header>
 
   <div class="container">
+    <div style="height: 52%;"></div>
 
-    <!-- 🔴 원형 배경 포함한 이미지 박스 -->
+    <!-- 원형 배경 포함한 이미지 박스 -->
     <div class="circle-container">
-    </div>
-    <div class="card">
-      {% comment %} <div class="image-box">
-        {% if image %}
-        <img src="{{ image.url }}" alt="사용자 등록 이미지">
-        {% else %}
-        <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
-        {% endif %}
+      <div class="card">
+        <div class="image-box">
+          {% if image %}
+          <img src="{{ image.url }}" alt="사용자 등록 이미지">
+          {% else %}
+          <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
+          {% endif %}
 
-        <div class="menu-info">
-          <strong id="menu-name">{{ menu.name }}</strong>
-          <span id="store-name">{{ store.name }}</span>
-        </div>
-        <div class="review-info">
-          <p id="store-status">영업중</p>
-          <p id="store-avg-review">
-            <span style="color: #FF4C4F;">★</span>{{ avg_rating }}
-          </p>
-          <p id="store-review-count">리뷰 {{ review_counting }}</p>
-        </div>
-      </div> {% endcomment %}
-
-      <!-- 이미지 박스 안에 별 아이콘 form 추가 -->
-        <div class="image-box" style="position: relative;">
-        {% if image %}
-            <img src="{{ image.url }}" alt="사용자 등록 이미지">
-        {% else %}
-            <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
-        {% endif %}
-
-        <!-- ⭐ 찜 아이콘 -->
-        <form action="{% url 'menu:like_menu' menu.id %}?from=review_confirm" method="post"
-            style="position: absolute; top: 8px; right: 8px;">
-        {% csrf_token %}
-        <button type="submit" style="background: none; border: none; cursor: pointer;">
-            {% if is_liked %}
-            <i class="fa-solid fa-star" style="color: gold; font-size: 24px;"></i>
-            {% else %}
-            <i class="fa-regular fa-star" style="color: lightgray; font-size: 24px;"></i>
-            {% endif %}
-        </button>
-        </form>
-
-
-
-
-        <!-- 나머지 메뉴 정보 -->
-        <div class="menu-info">
+          <div class="menu-info">
             <strong id="menu-name">{{ menu.name }}</strong>
             <span id="store-name">{{ store.name }}</span>
-        </div>
-        <div class="review-info">
+          </div>
+
+          <div class="review-info">
             <p id="store-status">영업중</p>
             <p id="store-avg-review">
-            <span style="color: #FF4C4F;">★</span>{{ avg_rating }}
+              <span style="color: #FF4C4F;">★</span>{{ rating }}
             </p>
             <p id="store-review-count">리뷰 {{ review_counting }}</p>
+          </div>
         </div>
-        </div>
-
+      </div>
     </div>
+
 
 
     <div class="stars">
@@ -96,11 +60,7 @@
 
     <p id="confirmMsg" class="styled-message">
       <span class="nickname">{{ nickname }}</span><span class="black">님</span>의
-      {% if review.image %}
-        사진 리뷰가 등록되었습니다.
-      {% else %}
-        별점 리뷰가 등록되었습니다.
-      {% endif %}
+      리뷰가 등록되었습니다.
     </p>
 
   </div>
@@ -119,6 +79,28 @@
           `;
         }
       }, { once: true });
+    });
+
+    function fitTextToWidth(selector, minSize = 10) {
+      document.querySelectorAll(selector).forEach(el => {
+        const parent = el.parentElement;
+        const originalSize = parseFloat(getComputedStyle(el).fontSize);
+        let fontSize = originalSize;
+
+        // 임시 설정: 줄어드는 동안 overflow 감지되게
+        el.style.whiteSpace = 'nowrap';
+        el.style.overflow = 'hidden';
+
+        while (el.scrollWidth > el.offsetWidth && fontSize > minSize) {
+          fontSize -= 0.5;
+          el.style.fontSize = fontSize + "px";
+        }
+      });
+    }
+
+    window.addEventListener("load", () => {
+      fitTextToWidth("#menu-name", 12);  // 메뉴는 최소 12px까지만
+      fitTextToWidth("#store-name", 10); // 가게는 최소 10px까지만
     });
   </script>
 
