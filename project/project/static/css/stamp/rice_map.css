@@ -1,0 +1,202 @@
+body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    margin: 0;
+    background-color: white;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .point-value {
+    color: #FF4C4F;
+    font-weight: 900;
+    font-size: 18px;
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  .rice-map-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 24px;
+}
+
+.point-text {
+text-align: center;
+font-size: 14px;
+font-weight: 500;
+margin-bottom: 16px;
+}
+
+.point-value {
+color: #FF4C4F;
+font-weight: 900;
+font-size: 18px;
+margin-left: 8px;
+}
+
+.coin-img {
+width: 16px;
+height: 16px;
+vertical-align: middle;
+margin-left: 4px;
+}
+
+.rice-map-wrapper {
+position: relative;
+border: 2px solid #FF4C4F;
+border-radius: 8px;
+padding: 12px;
+margin-bottom: 32px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rice-map-header {
+display: flex;
+justify-content: space-between;
+padding: 0 8px;
+font-size: 14px;
+font-weight: bold;
+color: #FF4C4F;
+}
+
+.map-date {
+color: #333;
+font-weight: 400;
+}
+
+.map-bg {
+display: block;
+max-width: 280px;
+width: 100%;
+margin: 0 auto;
+}
+
+.grain-char {
+position: absolute;
+width: 36px;
+height: 36px;
+}
+
+/* 예시 위치 (위쪽 3개만) — 실제 위치는 필요 시 조정 */
+.grain-1 { top: 48px; left: 45px; }
+.grain-2 { top: 48px; left: 126px; }
+.grain-3 { top: 48px; left: 207px; }
+
+.riceball-history-title {
+text-align: center;
+margin-bottom: 8px;
+}
+
+.riceball-history {
+display: flex;
+flex-wrap: wrap;
+gap: 16px;
+justify-content: center;
+}
+
+.riceball-box {
+display: flex;
+flex-direction: column;
+align-items: center;
+font-size: 12px;
+}
+
+.riceball-box img {
+width: 64px;
+height: 64px;
+margin-bottom: 6px;
+}
+
+  .rice-map-wrapper {
+position: relative;
+width: 280px;
+height: 280px;
+margin: 0 auto 32px auto;
+border: 2px solid #FF4C4F;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+padding: 8px;
+}
+
+.map-bg {
+width: 100%;
+height: auto;
+display: block;
+}
+
+.grain-char {
+position: absolute;
+width: 48px;
+height: 48px;
+}
+
+/* 정확한 위치 조정 (이미지 기준 수동 보정) */
+.grain-1 { top: 18px; left: 20px; }
+.grain-2 { top: 18px; left: 116px; }
+.grain-3 { top: 18px; left: 212px; }
+
+.grain-4 { top: 108px; left: 20px; }
+.grain-5 { top: 108px; left: 116px; }
+.grain-6 { top: 108px; left: 212px; }
+
+.grain-7 { top: 198px; left: 20px; }
+.grain-8 { top: 198px; left: 116px; }
+.grain-9 { top: 198px; left: 212px; }
+
+.rice-map-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 6px 8px;
+font-size: 14px;
+font-weight: 700;
+color: #FF4C4F;
+}
+
+.map-title {
+font-size: 14px;
+}
+
+.map-date {
+font-size: 13px;
+color: #555;
+}
+
+
+
+  .riceball-history-title {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .riceball-history {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .riceball-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .riceball-box img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 6px;
+  }
+
+  hr {
+    margin: 32px 0;
+    border: none;
+    border-top: 1px solid #eee;
+  }
