@@ -24,11 +24,11 @@
     <div class="circle-container">
     </div>
     <div class="card">
-      <div class="image-box">
+      {% comment %} <div class="image-box">
         {% if image %}
         <img src="{{ image.url }}" alt="사용자 등록 이미지">
         {% else %}
-        <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
+        <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
         {% endif %}
 
         <div class="menu-info">
@@ -38,11 +38,50 @@
         <div class="review-info">
           <p id="store-status">영업중</p>
           <p id="store-avg-review">
-            <span style="color: #FF4C4F;">★</span>{{ rating }}
+            <span style="color: #FF4C4F;">★</span>{{ avg_rating }}
           </p>
           <p id="store-review-count">리뷰 {{ review_counting }}</p>
         </div>
-      </div>
+      </div> {% endcomment %}
+
+      <!-- 이미지 박스 안에 별 아이콘 form 추가 -->
+        <div class="image-box" style="position: relative;">
+        {% if image %}
+            <img src="{{ image.url }}" alt="사용자 등록 이미지">
+        {% else %}
+            <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
+        {% endif %}
+
+        <!-- ⭐ 찜 아이콘 -->
+        <form action="{% url 'menu:like_menu' menu.id %}?from=review_confirm" method="post"
+            style="position: absolute; top: 8px; right: 8px;">
+        {% csrf_token %}
+        <button type="submit" style="background: none; border: none; cursor: pointer;">
+            {% if is_liked %}
+            <i class="fa-solid fa-star" style="color: gold; font-size: 24px;"></i>
+            {% else %}
+            <i class="fa-regular fa-star" style="color: lightgray; font-size: 24px;"></i>
+            {% endif %}
+        </button>
+        </form>
+
+
+
+
+        <!-- 나머지 메뉴 정보 -->
+        <div class="menu-info">
+            <strong id="menu-name">{{ menu.name }}</strong>
+            <span id="store-name">{{ store.name }}</span>
+        </div>
+        <div class="review-info">
+            <p id="store-status">영업중</p>
+            <p id="store-avg-review">
+            <span style="color: #FF4C4F;">★</span>{{ avg_rating }}
+            </p>
+            <p id="store-review-count">리뷰 {{ review_counting }}</p>
+        </div>
+        </div>
+
     </div>
 
 
