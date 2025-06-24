@@ -24,9 +24,12 @@
           <input type="password" id="user-pw" name="password" placeholder="비밀번호" required>
         </div>
 
-        <div class="button">
-          <button type="submit" id="loginBtn" onclick="location.href='{% url "search:home" %}'">로그인</button>
+        <a class="button" href={% url 'search:home' %}>
+          <button type="submit" id="loginBtn">로그인</button>
         </div>
+        {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        {% endif %}
 
         <a href={% url 'accounts:signup' %}>회원가입</a>
       </form>
@@ -37,9 +40,7 @@
 
 
   </div>
-  {% if error %}
-  <p style="color:red;">{{ error }}</p>
-  {% endif %}
+
 </body>
 
 </html>
