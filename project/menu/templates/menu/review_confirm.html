@@ -60,12 +60,13 @@
 
 
     <div class="stars">
-      {% for i in "12345" %}
-      {% if i <= rating %} <span style="color:#FF4C4F;"><i class="fa-solid fa-star"></i></span>
+    {% for i in "12345"|make_list %}
+        {% if forloop.counter <= rating %}
+        <span style="color:#FF4C4F;"><i class="fa-solid fa-star"></i></span>
         {% else %}
         <span style="color:lightgray;"><i class="fa-solid fa-star"></i></span>
         {% endif %}
-        {% endfor %}
+    {% endfor %}
     </div>
 
     <p id="confirmMsg" class="styled-message">
