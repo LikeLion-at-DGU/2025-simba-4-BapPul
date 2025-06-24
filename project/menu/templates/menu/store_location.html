@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <meta charset="UTF-8">
@@ -13,41 +14,65 @@
 <body>
 
   <header>
-    <i class="fa-solid fa-chevron-left"></i>
+    <a href="{% url 'menu:store_detail' store.id menu.id %}">
+      <i class="fa-solid fa-chevron-left" href=""></i>
+    </a>
     <p>리뷰</p>
     <p>ㅤ</p>
   </header>
 
-  <div class="top-bar">
-    <h2><span class="store-name">{{ store.name }}</span> 위치</h2>
+
+  <div class="container">
+    <div class="top-bar">
+      <h2><span class="store-name">{{ store.name }}</span> 위치</h2>
+    </div>
+
+    <div class="map">
+      <div id="map" style="width:330px; height:432px;"></div>
+    
+      <!-- Kakao 지도 JS: autoload false 옵션 추가 -->
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2fd26df3bd24e884729e2cc4a57416f9&autoload=false"></script>
+    
+      <script>
+        kakao.maps.load(function () {
+          var container = document.getElementById('map');
+          var options = {
+            center: new kakao.maps.LatLng({{ store.latitude }}, {{ store.longitude }}),
+            level: 3
+          };
+    
+          var map = new kakao.maps.Map(container, options);
+    
+          // 커스텀 마커 이미지 경로
+          var imageSrc = "{% static 'images/marker.png' %}";
+          var imageSize = new kakao.maps.Size(38, 38);
+          var imageOption = { offset: new kakao.maps.Point(20, 45) };
+    
+          // 마커 이미지 생성
+          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    
+          // 마커 생성
+          var marker = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng({{ store.latitude }}, {{ store.longitude }}),
+            image: markerImage,
+            map: map
+          });
+        });
+      </script>
+    </div>
+    
+
+    <div class="button">
+      <form action="{% url 'menu:store_review' store.id menu.id %}" method="get">
+        <button type="submit" class="review-button">리뷰 작성하기</button>
+      </form>
+    </div>
+
   </div>
-  
+
+
+
 </body>
+
 </html>
 
-
-
-
-
-
-
-<div id="map" style="width:100%; height:400px;"></div>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2fd26df3bd24e884729e2cc4a57416f9"></script>
-<script>
-  var container = document.getElementById('map');
-  var options = {
-      center: new kakao.maps.LatLng({{ store.latitude }}, {{ store.longitude }}),
-      level: 3
-  };
-
-  var map = new kakao.maps.Map(container, options);
-
-  var marker = new kakao.maps.Marker({
-      position: new kakao.maps.LatLng({{ store.latitude }}, {{ store.longitude }}),
-      map: map
-  });
-</script>
-<h3>
-  <a href="{% url 'menu:store_review' store.id menu.id %}">리뷰 작성하기</a>
-</h3>
