@@ -25,10 +25,15 @@ def search(request):
     user = request.user
     school = user.profile.school
     radius = int(request.GET.get('radius', 500))  # 기본값 500m 설정
+    menus_with_image = Menu.objects.exclude(image__isnull=True).exclude(image='')
+  # 빈 문자열 제거
+    advertised_menu = random.choice(list(menus_with_image)) if menus_with_image.exists() else None
+
 
     return render(request, 'home.html', {
         'school': school,
         'radius': radius,
+        'advertised_menu': advertised_menu,
     })
 
 
