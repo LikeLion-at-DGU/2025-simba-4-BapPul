@@ -183,6 +183,5 @@ body {
 }
 
 .bookmark-btn.active {
-    color: #FF4C4F;
-    /* 찜한 경우: 빨간색 */
+    color: #FFE310;
 }
