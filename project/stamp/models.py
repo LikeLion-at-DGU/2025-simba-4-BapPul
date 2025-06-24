@@ -5,6 +5,9 @@ from menu.models import Review
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class RiceMap(models.Model):
     #유저별 밥지도
@@ -72,3 +75,9 @@ class Riceball(models.Model):
 
     def __str__(self):
         return f"주먹밥 - {self.rice_map.owner.nickname} - {self.created_at.date()}"
+
+
+@receiver(post_save, sender=Profile)
+def create_default_rice_map(sender, instance, created, **kwargs):
+    if created:
+        RiceMap.objects.create(owner=instance)
