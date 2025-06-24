@@ -48,15 +48,17 @@
       <label>사진 리뷰 남기기</label>
       <div class="img-container">
         <div class="image-upload-box" onclick="document.getElementById('imageInput').click();">
-          <i class="fa-solid fa-plus"></i>
+          <img id="previewImage" src="#" alt="리뷰 사진 미리보기" style="display: none;" />
+          <i class="fa-solid fa-plus" id="plusIcon"></i>
         </div>
         <input type="file" id="imageInput" name="photo" accept="image/*" style="display: none;">
-  
+        
         <div class="warning">
           <i id="warnIcon" class="fa-solid fa-triangle-exclamation"></i>
           <p>리뷰는 수정 및 삭제가 불가능합니다.</p>
         </div>
       </div>
+      
       <button type="submit" id="submitBtn" disabled>등록하기</button>
     </form>
   </div>
@@ -74,6 +76,22 @@
         submitBtn.classList.add('enabled');
       });
     });
+  });
+
+  document.getElementById("imageInput").addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    const previewImage = document.getElementById("previewImage");
+    const plusIcon = document.getElementById("plusIcon");
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+        previewImage.style.display = "block";
+        plusIcon.style.display = "none";  // + 아이콘 숨기기
+      };
+      reader.readAsDataURL(file);
+    }
   });
 </script>
 
