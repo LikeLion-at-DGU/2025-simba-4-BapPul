@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background-color: #fff;
+    padding: 0 16px;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom : 40px;
+  }
+
+  .top-bar i {
+    font-size: 20px;
+    color: #FF4C4F;
+  }
+
+  .top-bar-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    font-size: 18px;
+    color: #FF4C4F;
+  }
+
+  .like-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 60px;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .like-item {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 16px;
+  }
+
+  .image-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .image-row img {
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: #ddd;
+  }
+
+  .menu-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .store-name {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .status-review {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .status-review .star {
+    color: #FF4C4F;
+  }
+
+  .like-icon {
+    font-size: 20px;
+    color: #ccc;
+  }
+
+  .like-icon.active {
+    color: #FF4C4F;
+  }

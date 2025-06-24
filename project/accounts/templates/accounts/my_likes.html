@@ -3,66 +3,172 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>나의 찜 목록</title>
-  <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
-  <style>
-    .like-list {
-      margin: 20px;
-      padding: 10px;
-      background-color: white;
-      border-radius: 16px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .like-item {
-      padding: 15px;
-      border-bottom: 1px solid #eee;
-    }
-    .like-item:last-child {
-      border-bottom: none;
-    }
-    .like-item-title {
-      font-weight: bold;
-      font-size: 16px;
-    }
-    .like-item-sub {
-      font-size: 14px;
-      color: #555;
-    }
-    .like-item a {
-      text-decoration: none;
-      color: inherit;
-    }
-    .like-item a:hover {
-      color: #ff4d88;
-    }
-  </style>
+  <title>찜한 메뉴</title>
+  <link rel="stylesheet" href="{% static 'css/accounts/my_likes.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <h2 style="margin: 20px;">🍽️ 나의 찜</h2>
 
-  <div class="like-list">
+  <div class="top-bar">
+    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fas fa-chevron-left"></i></a>
+    <div class="top-bar-title">찜한 메뉴</div>
+  </div>
+
+<!-- 이부분이 나중에 활성화해야 할 코드 -->
+  <!-- <div class="like-list">
     {% for like in likes %}
       {% if like.menu %}
-      <div class="like-item">
-        <a href="{% url 'menu:store_detail' store_id=like.menu.store.id menu_id=like.menu.id %}">
-          <div class="like-item-title">{{ like.menu.name }}</div>
-          <div class="like-item-sub">{{ like.menu.store.name }}</div>
-        </a>
-      </div>
+        <div class="like-item">
+          <a href="{% url 'menu:store_detail' store_id=like.menu.store.id menu_id=like.menu.id %}">
+            <div class="image-row">
+              {% for i in "123"|make_list %}
+                <img src="{{ like.menu.image.url|default:'https://via.placeholder.com/90' }}" alt="메뉴 이미지">
+              {% endfor %}
+            </div>
+            <div class="menu-info">
+              <div class="menu-text">
+                <div class="menu-title">{{ like.menu.name }}</div>
+                <div class="store-name">{{ like.menu.store.name }}</div>
+                <div class="status-review">
+                  <span style="font-weight: bold;">영업 중</span>
+                  <span class="star">★</span><span>4.5</span>
+                  <span>리뷰 999+</span>
+                </div>
+              </div>
+              <div class="like-icon toggle-like">
+                <i class="far fa-star"></i>
+              </div>
+            </div>
+          </a>
+        </div>
       {% else %}
-      <div class="like-item">
-        <div class="like-item-title">[삭제된 메뉴]</div>
-      </div>
+        <div class="like-item">
+          <div class="menu-title">[삭제된 메뉴]</div>
+        </div>
       {% endif %}
     {% empty %}
       <p style="margin: 20px;">찜한 음식이 아직 없습니다.</p>
     {% endfor %}
+  </div> -->
+
+  <!-- 여기부터는 하드코딩 -->
+  <div class="like-list">
+    <div class="like-item">
+      <div class="image-row">
+        <img src="https://via.placeholder.com/90" alt="메뉴1">
+        <img src="https://via.placeholder.com/90" alt="메뉴2">
+        <img src="https://via.placeholder.com/90" alt="메뉴3">
+      </div>
+      <div class="menu-info">
+        <div class="menu-text">
+          <div class="menu-title">메뉴 이름</div>
+          <div class="store-name">음식점 이름</div>
+          <div class="status-review">
+            <span style="font-weight: bold;">영업 중</span>
+            <span class="star">★</span><span>4.5</span>
+            <span>리뷰 999+</span>
+          </div>
+        </div>
+        <div class="like-icon toggle-like">
+          <i class="far fa-star"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="like-item">
+      <div class="image-row">
+        <img src="https://via.placeholder.com/90" alt="메뉴1">
+        <img src="https://via.placeholder.com/90" alt="메뉴2">
+        <img src="https://via.placeholder.com/90" alt="메뉴3">
+      </div>
+      <div class="menu-info">
+        <div class="menu-text">
+          <div class="menu-title">로제떡볶이</div>
+          <div class="store-name">청년다방</div>
+          <div class="status-review">
+            <span style="font-weight: bold;">영업 중</span>
+            <span class="star">★</span><span>4.9</span>
+            <span>리뷰 203</span>
+          </div>
+        </div>
+        <div class="like-icon toggle-like">
+          <i class="far fa-star"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="like-item">
+      <div class="image-row">
+        <img src="https://via.placeholder.com/90" alt="메뉴1">
+        <img src="https://via.placeholder.com/90" alt="메뉴2">
+        <img src="https://via.placeholder.com/90" alt="메뉴3">
+      </div>
+      <div class="menu-info">
+        <div class="menu-text">
+          <div class="menu-title">로제떡볶이</div>
+          <div class="store-name">청년다방</div>
+          <div class="status-review">
+            <span style="font-weight: bold;">영업 중</span>
+            <span class="star">★</span><span>4.9</span>
+            <span>리뷰 203</span>
+          </div>
+        </div>
+        <div class="like-icon toggle-like">
+          <i class="far fa-star"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="like-item">
+      <div class="image-row">
+        <img src="https://via.placeholder.com/90" alt="메뉴1">
+        <img src="https://via.placeholder.com/90" alt="메뉴2">
+        <img src="https://via.placeholder.com/90" alt="메뉴3">
+      </div>
+      <div class="menu-info">
+        <div class="menu-text">
+          <div class="menu-title">로제떡볶이</div>
+          <div class="store-name">청년다방</div>
+          <div class="status-review">
+            <span style="font-weight: bold;">영업 중</span>
+            <span class="star">★</span><span>4.9</span>
+            <span>리뷰 203</span>
+          </div>
+        </div>
+        <div class="like-icon toggle-like">
+          <i class="far fa-star"></i>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="nav-bar">
-    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fa fa-user">mypage</i></a>
-    <a href="{% url 'search:home' %}"><i class="fa fa-home">home</i></a>
-    <a href="#"><i class="fa fa-map-marker-alt">stamp(기능X)</i></a>
-  </div>
+  <!-- 여기까지 -->
+ 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const likeButtons = document.querySelectorAll(".toggle-like");
+    
+      likeButtons.forEach(btn => {
+        btn.addEventListener("click", function () {
+          const icon = this.querySelector("i");
+          const isFilled = icon.classList.contains("fas");
+    
+          if (isFilled) {
+            // 채워진 별 → 비어 있는 별
+            icon.classList.remove("fas");
+            icon.classList.add("far");
+            this.classList.remove("active");
+          } else {
+            // 비어 있는 별 → 채워진 별
+            icon.classList.remove("far");
+            icon.classList.add("fas");
+            this.classList.add("active");
+          }
+        });
+      });
+    });
+    </script>
+    
 </body>
 </html>

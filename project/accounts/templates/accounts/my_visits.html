@@ -4,99 +4,236 @@
 <head>
   <meta charset="UTF-8">
   <title>방문 기록</title>
-  <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
-  <style>
-    body {
-      font-family: 'Apple SD Gothic Neo', sans-serif;
-      background-color: #f9f9f9;
-      padding: 20px;
-    }
-    .visit-date {
-      font-weight: bold;
-      margin-top: 30px;
-      font-size: 16px;
-      color: #d33;
-    }
-    .visit-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-      margin-top: 10px;
-      padding: 15px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    .menu-thumb {
-      width: 80px;
-      height: 80px;
-      background-color: #ddd;
-      border-radius: 8px;
-    }
-    .menu-info {
-      flex-grow: 1;
-    }
-    .menu-name {
-      font-size: 16px;
-      font-weight: bold;
-      color: #000;
-    }
-    .store-name {
-      font-size: 14px;
-      color: #666;
-      margin-top: 4px;
-    }
-    .review-status {
-      font-size: 14px;
-      color: #e67e22;
-      margin-top: 4px;
-    }
-    .stars {
-      color: #f39c12;
-      font-size: 16px;
-      margin-top: 4px;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/accounts/my_visits.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <h2>📍 방문 기록</h2>
 
-  {% regroup visits by visited_at.date as visit_date_groups %}
+  <div class="top-bar">
+    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fas fa-chevron-left"></i></a>
+    <div class="top-bar-title">방문 기록</div>
+  </div>
 
-  {% for group in visit_date_groups %}
-    <div class="visit-date">{{ group.grouper|date:"Y년 m월 d일" }}</div>
-    {% for visit in group.list %}
-      <div class="visit-card">
-        <div class="menu-thumb">
-          {% if visit.menu.image %}
-            <img src="{{ visit.menu.image.url }}" alt="메뉴 이미지" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-          {% else %}
-            <!-- 대체 이미지 -->
-          {% endif %}
-        </div>
-        <div class="menu-info">
-          {% if visit.menu %}
-            <a href="{% url 'menu:store_detail' store_id=visit.store.id menu_id=visit.menu.id %}" class="menu-name">{{ visit.menu.name }}</a>
-            <div class="store-name">{{ visit.store.name }}</div>
-            {% if visit.reviewed %}
-              <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>  <!-- 실제로는 별점 가져와야 함 -->
-            {% else %}
-              <div class="review-status">✍ 리뷰 대기 중</div>
-            {% endif %}
-          {% else %}
-            <div class="menu-name">[삭제된 메뉴]</div>
-          {% endif %}
-        </div>
+  <!-- 이부분 나중에 활성화 시켜야 함 -->
+  <!-- <div class="container">
+    {% regroup visits by visited_at.date as grouped_visits %}
+  {% for group in grouped_visits %}
+    <div class="visit-section">
+      <div class="visit-date">{{ group.grouper|date:"Y.MM.dd" }}</div>
+      <div class="menu-slider">
+        {% for visit in group.list %}
+          <div class="menu-card">
+            <div class="menu-img-wrapper">
+              {% if visit.menu.image %}
+                <img src="{{ visit.menu.image.url }}" alt="메뉴 이미지">
+              {% else %}
+                <img src="https://via.placeholder.com/160x100" alt="기본 이미지">
+              {% endif %}
+              <i class="far fa-star like-toggle" data-menu-id="{{ visit.menu.id }}"></i>
+            </div>
+            <div class="menu-title">{{ visit.menu.name }}</div>
+            <div class="menu-sub">{{ visit.store.name }}</div>
+            <div class="menu-status">
+              <span style="font-weight: bold;">영업 중</span>
+              <span class="star">★</span><span>4.5</span>
+              <span>리뷰 999+</span>
+            </div>
+          </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
   {% empty %}
     <p>아직 방문 기록이 없습니다.</p>
-  {% endfor %}
-
-  <div class="nav-bar">
-    <a href="{% url 'accounts:mypage' request.user.id %}"><i class="fa fa-user">mypage</i></a>
-    <a href="{% url 'search:home' %}"><i class="fa fa-home">home</i></a>
-    <a href="#"><i class="fa fa-map-marker-alt">stamp</i></a>
+  {% endfor %} 
   </div>
+-->
+
+
+   <!-- 여기부터 하드코딩 -->
+
+<!-- 방문 날짜 1 -->
+<div class="container">
+  <div class="visit-section">
+    <div class="visit-date">2025.06.15</div>
+    <div class="menu-slider">
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100" alt="메뉴">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">김치찌개</div>
+        <div class="menu-sub">청년다방</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.5</span>
+          <span>리뷰 999+</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">된장찌개</div>
+        <div class="menu-sub">청년다방</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.5</span>
+          <span>리뷰 999+</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">비빔밥</div>
+        <div class="menu-sub">한식명가</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.6</span>
+          <span>리뷰 321</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">불고기</div>
+        <div class="menu-sub">고기천국</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.7</span>
+          <span>리뷰 820</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">라면</div>
+        <div class="menu-sub">편의점</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.2</span>
+          <span>리뷰 102</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 방문 날짜 2 -->
+  <div class="visit-section">
+    <div class="visit-date">2025.05.25</div>
+    <div class="menu-slider">
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">돈까스</div>
+        <div class="menu-sub">홍익돈까스</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.3</span>
+          <span>리뷰 560</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">짬뽕</div>
+        <div class="menu-sub">중화반점</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.4</span>
+          <span>리뷰 210</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">짜장면</div>
+        <div class="menu-sub">중화반점</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.0</span>
+          <span>리뷰 301</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 방문 날짜 3 -->
+  <div class="visit-section">
+    <div class="visit-date">2025.04.18</div>
+    <div class="menu-slider">
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">떡볶이</div>
+        <div class="menu-sub">엽기떡볶이</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.8</span>
+          <span>리뷰 780</span>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-img-wrapper">
+          <img src="https://via.placeholder.com/160x100">
+          <i class="far fa-star like-toggle"></i>
+        </div>
+        <div class="menu-title">순대</div>
+        <div class="menu-sub">분식천국</div>
+        <div class="menu-status">
+          <span style="font-weight: bold;">영업 중</span>
+          <span class="star">★</span><span>4.1</span>
+          <span>리뷰 260</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 여기까지 하드코딩 -->
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const likeIcons = document.querySelectorAll(".like-toggle");
+    
+      likeIcons.forEach(icon => {
+        icon.addEventListener("click", function () {
+          if (icon.classList.contains("far")) {
+            icon.classList.remove("far");
+            icon.classList.add("fas");
+          } else {
+            icon.classList.remove("fas");
+            icon.classList.add("far");
+          }
+    
+          // TODO: 서버 전송하려면 아래 데이터로 fetch 활용
+          const menuId = icon.dataset.menuId;
+          const isLiked = icon.classList.contains("fas");
+          console.log(`menuId: ${menuId}, liked: ${isLiked}`);
+        });
+      });
+    });
+    </script>
 </body>
 </html>
