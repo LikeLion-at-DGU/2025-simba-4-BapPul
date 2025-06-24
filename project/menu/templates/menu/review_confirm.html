@@ -25,11 +25,19 @@
     <div class="circle-container">
       <div class="card">
         <div class="image-box">
+          <form method="POST" action="{% url 'menu:like_menu' menu.id %}?from=review_confirm" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="bookmark-btn {% if is_liked %}active{% endif %}">
+              <i class="fa-solid fa-star"></i>
+            </button>
+          </form>
+
           {% if image %}
           <img src="{{ image.url }}" alt="사용자 등록 이미지">
           {% else %}
           <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
           {% endif %}
+
 
           <div class="menu-info">
             <strong id="menu-name">{{ menu.name }}</strong>
@@ -66,20 +74,6 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.addEventListener('click', function () {
-        const confirmMsg = document.getElementById('confirmMsg');
-        const nickname = document.querySelector('.nickname')?.textContent || '';
-        if (confirmMsg && nickname) {
-          confirmMsg.innerHTML = `
-            <div>
-              <span class="nickname">${nickname}</span><span class="black">님!</span>
-            </div>
-            <div class="second-line">오늘의 리뷰가 밥지도에 등록되었어요!</div>
-          `;
-        }
-      }, { once: true });
-    });
 
     function fitTextToWidth(selector, minSize = 10) {
       document.querySelectorAll(selector).forEach(el => {
@@ -102,6 +96,10 @@
       fitTextToWidth("#menu-name", 12);  // 메뉴는 최소 12px까지만
       fitTextToWidth("#store-name", 10); // 가게는 최소 10px까지만
     });
+
+    setTimeout(function () {
+      window.location.href = "/";
+    }, 3000);  // 3000ms = 3초
   </script>
 
 </body>
