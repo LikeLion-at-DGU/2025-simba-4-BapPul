@@ -29,9 +29,11 @@ padding: 24px;
 
 .point-text {
 text-align: center;
-font-size: 14px;
-font-weight: 500;
-margin-bottom: 16px;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+margin-bottom: 40px;
 }
 
 .point-value {
@@ -64,6 +66,7 @@ padding: 0 8px;
 font-size: 14px;
 font-weight: bold;
 color: #FF4C4F;
+margin-bottom: 30px;
 }
 
 .map-date {
@@ -83,11 +86,6 @@ position: absolute;
 width: 36px;
 height: 36px;
 }
-
-/* 예시 위치 (위쪽 3개만) — 실제 위치는 필요 시 조정 */
-.grain-1 { top: 48px; left: 45px; }
-.grain-2 { top: 48px; left: 126px; }
-.grain-3 { top: 48px; left: 207px; }
 
 .riceball-history-title {
 text-align: center;
@@ -116,8 +114,8 @@ margin-bottom: 6px;
 
   .rice-map-wrapper {
 position: relative;
-width: 280px;
-height: 280px;
+width: 350px;
+height: 290px;
 margin: 0 auto 32px auto;
 border: 2px solid #FF4C4F;
 border-radius: 8px;
@@ -137,18 +135,20 @@ width: 48px;
 height: 48px;
 }
 
-/* 정확한 위치 조정 (이미지 기준 수동 보정) */
-.grain-1 { top: 18px; left: 20px; }
-.grain-2 { top: 18px; left: 116px; }
-.grain-3 { top: 18px; left: 212px; }
 
-.grain-4 { top: 108px; left: 20px; }
-.grain-5 { top: 108px; left: 116px; }
-.grain-6 { top: 108px; left: 212px; }
+/* 정확한 위치 조정 */
+.grain-1 { top: 60px; left: 58px; }
+.grain-2 { top: 60px; left: 160px; }
+.grain-3 { top: 60px; left: 262px; }
 
-.grain-7 { top: 198px; left: 20px; }
-.grain-8 { top: 198px; left: 116px; }
-.grain-9 { top: 198px; left: 212px; }
+.grain-4 { top: 138px; left: 58px; }
+.grain-5 { top: 138px; left: 160px; }
+.grain-6 { top: 138px; left: 262px; }
+
+.grain-7 { top: 216px; left: 58px; }
+.grain-8 { top: 216px; left: 160px; }
+.grain-9 { top: 216px; left: 262px; }
+
 
 .rice-map-header {
 display: flex;
@@ -161,24 +161,32 @@ color: #FF4C4F;
 }
 
 .map-title {
-font-size: 14px;
+font-size: 15px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
 }
 
 .map-date {
-font-size: 13px;
-color: #555;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 
 
   .riceball-history-title {
+    margin-bottom: 20px;
     font-size: 15px;
-    margin-bottom: 8px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
   }
 
   .riceball-history {
     display: flex;
-    gap: 16px;
+    gap: 50px;
     flex-wrap: wrap;
   }
 
@@ -190,8 +198,8 @@ color: #555;
   }
 
   .riceball-box img {
-    width: 64px;
-    height: 64px;
+    width: 88px;
+    height: 88px;
     margin-bottom: 6px;
   }
 
