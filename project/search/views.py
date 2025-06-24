@@ -37,6 +37,7 @@ def search(request):
     })
 
 
+
 def recommend_result(request):
     user = request.user
     try:
