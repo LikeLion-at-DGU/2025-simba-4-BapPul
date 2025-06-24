@@ -32,25 +32,10 @@
           <p style="margin-top: 10px">주먹밥 개수 🍙 <strong style="margin-left: 8px; font-size: 18px;">{{ riceball_count }}개</strong></p>
         </div>
   
-        <!-- 프로필 아이콘 (프로필 사진 업로드 가능) -->
-        <form id="profileForm" action="{% url 'accounts:upload_profile_image' %}" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          <label for="profileImageInput">
-            {% if user.profile.image %}
-              <img
-                id="profileImage"
-                src="{{ user.profile.image.url }}"
-                alt="프로필 이미지"
-                class="profile-pic"
-              />
-            {% else %}
-              <div class="profile-pic default-icon" style="margin-left: 28px;">
-                <i class="fa fa-user"></i>
-              </div>
-            {% endif %}
-          </label>
-          <input type="file" name="profile_image" id="profileImageInput" style="display: none;" accept="image/*" onchange="document.getElementById('profileForm').submit();">
-        </form>
+        <!-- 프로필 아이콘 -->
+        <div class="profile-pic default-icon" style="margin-left: 28px;">
+          <i class="fa fa-user"></i>
+        </div>
       </div>
   
     </div>
