@@ -1,11 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <title>밥지도</title>
   <link rel="stylesheet" href="{% static 'css/stamp/rice_map.css' %}">
 </head>
+
 <body>
   <div class="rice-map-container">
 
@@ -23,19 +25,54 @@
         <span class="map-date">{{ current_rice_map.created_at|date:"Y.m.d" }} 오픈</span>
       </div>
 
-      <img src="{% static 'assets/img/map_component.svg' %}" alt="밥지도 배경" class="map-bg">
+      <!-- {# 실제 백엔드용 백그라운드 주석 처리 #}
+      {# <img src="{% static 'assets/img/map_component.svg' %}" alt="밥지도 배경" class="map-bg"> #}
 
       {% for grain in rice_grains %}
         {% if grain.stamped %}
-          <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-{{ forloop.counter }}">
+          {% if forloop.counter <= 3 or forloop.counter >= 7 %}
+            <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-{{ forloop.counter }}">
+          {% else %}
+            <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-{{ forloop.counter }}">
+          {% endif %}
         {% endif %}
-      {% endfor %}
+      {% endfor %} -->
+
+      <!-- 밥지도 안의 밥알 하드코딩 여기부터 -->
+      <img src="{% static 'assets/img/map_component.svg' %}" class="map-bg" alt="배경">
+      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-1">
+      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-2">
+      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-3">
+      <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-4">
+      <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-5">
+      <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-6">
+      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-7">
+      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-8">
+      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-9">
     </div>
+    <!-- 여기까지 하드코딩 -->
 
     <!-- 주먹밥 -->
     <p class="riceball-history-title">
       <span style="color: red;">{{ request.user.profile.nickname }}</span>님 현재 주먹밥을 <b>{{ riceball_count }}</b>개 만들었어요!
     </p>
+
+<!-- 주먹밥 하드코딩 여기부터 -->
+<div class="riceball-history">
+  <div class="riceball-box">
+    <img src="{% static 'assets/img/rice_ball.svg' %}" alt="주먹밥">
+    <p>2025/03/02<br>~ 2025/05/15</p>
+  </div>
+  <div class="riceball-box">
+    <img src="{% static 'assets/img/rice_ball.svg' %}" alt="주먹밥">
+    <p>2025/03/02<br>~ 2025/05/15</p>
+  </div>
+  <div class="riceball-box">
+    <img src="{% static 'assets/img/rice_ball.svg' %}" alt="주먹밥">
+    <p>2025/03/02<br>~ 2025/05/15</p>
+  </div>
+</div>
+<!-- 여기까지 하드코딩 -->
 
     <div class="riceball-history">
       {% for map in past_rice_maps %}
@@ -51,5 +88,10 @@
     <div style="margin-bottom: 80px;"></div>
     {% include 'shared/_navbar.html' %}
   </div>
+
+
+
+
+
 </body>
 </html>
