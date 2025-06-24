@@ -1,0 +1,132 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 10% 3% 3% 3%;
+    height: 40px;
+    margin: 0;
+    font-weight: 600;
+}
+
+body{
+    width: 100%;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;        /* 세로 위치는 유지 */
+    overflow: hidden;       /* 넘치는 원 잘라냄 */
+}
+
+.circle-container {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    left: 50%;              /* 가로 중앙 정렬 */
+    transform: translateX(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    background: radial-gradient(circle,
+            rgba(255, 45, 48, 0.282) 50%,
+            rgba(255, 114, 116, 0.198) 60%,
+            rgba(255, 166, 166, 0.185) 65%,
+            transparent 70%
+            /* 끝: 완전히 투명W*/
+        );
+
+        z-index: 0;  
+        pointer-events: none;
+}
+
+.image-box img {
+    width: 240px;
+    height: 145px;
+    border: 1px solid gray;
+}
+
+.card {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    height: 240px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 30%;
+}
+
+.menu-info{
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    margin-top: 4%;
+}
+
+#menu-name{
+    font-size: 22px;
+    font-weight: 600;
+    
+}
+
+#store-name{
+    font-size: 16px;
+    color: #8A8A8A; 
+    font-weight: 600;
+}
+
+.review-info{
+    display: flex;
+    justify-content: space-around;
+    margin: 1% 2%;
+    align-items: center;
+    
+}
+
+.review-info p{
+    margin: 0;
+}
+
+#store-status{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#store-avg-review{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#store-review-count{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.stars{
+    display: flex;
+    margin-top: 15%;
+    font-size: 30px;
+    gap: 25px;
+}
+
+.confirm-msg{
+    display: flex;
+    margin-top: 10%;
+    font-size: 15px;
+    font-weight: 600;
+}
+

@@ -1,21 +1,88 @@
 {% load static %}
-<h2>리뷰</h2>
 
-<div class="review-box">
-  <div class="image-box">
-    {% if image %}
-      <!-- 사용자가 업로드한 이미지가 있을 경우 -->
-      <img src="{{ image.url }}" alt="사용자 등록 이미지">
-    {% else %}
-      <!-- 이미지 없을 경우 기본 이미지 사용 -->
-      <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
-    {% endif %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/menu/review_confirm.css' %}">
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+    <i class="fa-solid fa-chevron-left"></i>
+    <p>리뷰</p>
+    <p>ㅤ</p>
+  </header>
+
+  <div class="container">
+
+    <!-- 🔴 원형 배경 포함한 이미지 박스 -->
+    <div class="circle-container">
+    </div>
+    <div class="card">
+      <div class="image-box">
+        {% if image %}
+        <img src="{{ image.url }}" alt="사용자 등록 이미지">
+        {% else %}
+        <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
+        {% endif %}
+
+        <div class="menu-info">
+          <strong id="menu-name">{{ menu.name }}</strong>
+          <span id="store-name">{{ store.name }}</span>
+        </div>
+        <div class="review-info">
+          <p id="store-status">영업중</p>
+          <p id="store-avg-review">
+            <span style="color: #FF4C4F;">★</span>{{ rating }}
+          </p>
+          <p id="store-review-count">리뷰 {{ review_counting }}</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="stars">
+      {% for i in "12345" %}
+      {% if i <= rating %} <span style="color:#FF4C4F;"><i class="fa-solid fa-star"></i></span>
+        {% else %}
+        <span style="color:lightgray;"><i class="fa-solid fa-star"></i></span>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <p id="confirmMsg" class="styled-message">
+      <span class="nickname">{{ nickname }}</span><span class="black">님</span>의
+      {% if review.image %}
+        사진 리뷰가 등록되었습니다.
+      {% else %}
+        별점 리뷰가 등록되었습니다.
+      {% endif %}
+    </p>
+
   </div>
 
-  <div class="menu-info">
-    <strong>{{ menu.name }}</strong> <span>{{ store.name }}</span>
-    <p>⭐ {{ rating }}점</p>
-  </div>
-</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.addEventListener('click', function () {
+        const confirmMsg = document.getElementById('confirmMsg');
+        const nickname = document.querySelector('.nickname')?.textContent || '';
+        if (confirmMsg && nickname) {
+          confirmMsg.innerHTML = `
+            <div>
+              <span class="nickname">${nickname}</span><span class="black">님!</span>
+            </div>
+            <div class="second-line">오늘의 리뷰가 밥지도에 등록되었어요!</div>
+          `;
+        }
+      }, { once: true });
+    });
+  </script>
 
-<p><span style="color:red">{{ nickname }}</span>님의 리뷰가 등록되었습니다.</p>
+</body>
+
+</html>

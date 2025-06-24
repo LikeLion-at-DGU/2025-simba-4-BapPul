@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 header {
     display: flex;
     justify-content: space-between;
@@ -95,6 +91,17 @@ label {
     margin-top: 5%;
 }
 
+.image-upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
 .image-upload-box i {
     font-size: 24px;
     color: white;
@@ -111,7 +118,7 @@ label {
     width: 100%;
 }
 
-p {
+.review-info p{
     margin: 0;
 }
 
@@ -144,4 +151,24 @@ button {
 button.enabled {
     background-color: #FF4C4F;
     cursor: pointer;
+}
+
+#confirmMsg {
+    font-size: 15px;
+    text-align: center;
+    color: #333;
+    max-width: 80%;
+    font-weight: 600;
+    margin: 1.5rem auto 0;
+    word-break: keep-all;
+}
+
+.nickname {
+    color: #FF4C4F;
+    font-weight: bold;
+}
+
+
+.second-line {
+    margin-top: 0.3em; 
 }
