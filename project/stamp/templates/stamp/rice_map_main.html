@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
   <h1>밥지도</h1>
   <div>
     <!-- 이미지 또는 일러스트 위치 -->
-    <img src="#" alt="밥지도" style="width: 60%;">
+    <img src="{% static 'assets/img/rice_ball.svg' %}" alt="밥지도" style="width: 60%;">
   </div>
   <p>하루에 하나씩 사진 리뷰 남기고<br>포인트 받자!</p>
 </body>
