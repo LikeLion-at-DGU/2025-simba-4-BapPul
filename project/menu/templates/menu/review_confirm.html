@@ -13,7 +13,9 @@
 
 <body>
   <header>
-    <i class="fa-solid fa-chevron-left" a="#"></i>
+    <a href="/search/">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
     <p>리뷰</p>
     <p>ㅤ</p>
   </header>
@@ -58,12 +60,13 @@
 
 
     <div class="stars">
-      {% for i in "12345" %}
-      {% if i <= rating %} <span style="color:#FF4C4F;"><i class="fa-solid fa-star"></i></span>
+    {% for i in "12345"|make_list %}
+        {% if forloop.counter <= rating %}
+        <span style="color:#FF4C4F;"><i class="fa-solid fa-star"></i></span>
         {% else %}
         <span style="color:lightgray;"><i class="fa-solid fa-star"></i></span>
         {% endif %}
-        {% endfor %}
+    {% endfor %}
     </div>
 
     <p id="confirmMsg" class="styled-message">
@@ -98,8 +101,8 @@
     });
 
     setTimeout(function () {
-      window.location.href = "/";
-    }, 3000);  // 3000ms = 3초
+      window.location.href = "/search/";
+    }, 5000);  // 3000ms = 3초
   </script>
 
 </body>

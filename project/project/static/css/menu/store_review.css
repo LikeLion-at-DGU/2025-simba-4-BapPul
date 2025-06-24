@@ -153,22 +153,3 @@ button.enabled {
     cursor: pointer;
 }
 
-#confirmMsg {
-    font-size: 15px;
-    text-align: center;
-    color: #333;
-    max-width: 80%;
-    font-weight: 600;
-    margin: 1.5rem auto 0;
-    word-break: keep-all;
-}
-
-.nickname {
-    color: #FF4C4F;
-    font-weight: bold;
-}
-
-
-.second-line {
-    margin-top: 0.3em; 
-}

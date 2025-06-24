@@ -10,3 +10,4 @@ document.getElementById("price-form").addEventListener("submit", function (e) {
       warning.style.display = "none"; // 통과 시 경고 숨기기
     }
   });
+
