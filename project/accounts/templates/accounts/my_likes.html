@@ -15,24 +15,33 @@
   </div>
 
 <!-- 이부분이 나중에 활성화해야 할 코드 -->
-  <!-- <div class="like-list">
+   <div class="like-list">
     {% for like in likes %}
       {% if like.menu %}
         <div class="like-item" data-menu-id="{{ like.menu.id }}">
           <a href="{% url 'menu:store_detail' store_id=like.menu.store.id menu_id=like.menu.id %}">
             <div class="image-row">
-              {% for i in "123"|make_list %}
-                <img src="{{ like.menu.image.url|default:'https://via.placeholder.com/90' }}" alt="메뉴 이미지">
-              {% endfor %}
+              {% if like.reviews %}
+                {% for review in like.reviews|dictsortreversed:"id"|slice:":3" %}
+                  {% if review.image %}
+                    <img src="{{ review.image.url }}" alt="리뷰 이미지">
+                  {% else %}
+                    <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
+              {% endif %}
             </div>
+
+
             <div class="menu-info">
               <div class="menu-text">
                 <div class="menu-title">{{ like.menu.name }}</div>
                 <div class="store-name">{{ like.menu.store.name }}</div>
                 <div class="status-review">
-                  <span style="font-weight: bold;">영업 중</span>
-                  <span class="star">★</span><span>4.5</span>
-                  <span>리뷰 999+</span>
+                  <span class="star">★</span><span>{{ like.avg_rating|default:0.0|floatformat:1 }}</span>
+                  <span>리뷰 {{like.review_count|default:0}}개</span>
                 </div>
               </div>
               <div class="like-icon toggle-like active">
@@ -49,9 +58,9 @@
     {% empty %}
       <p style="margin: 20px;">찜한 음식이 아직 없습니다.</p>
     {% endfor %}
-  </div> -->
+  </div>
 
-  <!-- 여기부터는 하드코딩 -->
+  {% comment %} <!-- 여기부터는 하드코딩 -->
   <div class="like-list">
     <div class="like-item">
       <div class="image-row">
@@ -143,7 +152,7 @@
 
   </div>
 
-  <!-- 여기까지 -->
+  <!-- 여기까지 --> {% endcomment %}
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const likeButtons = document.querySelectorAll(".toggle-like");
@@ -165,7 +174,7 @@
             })
             .then(res => {
               if (res.ok) {
-                likeItem.remove();  // DOM에서 제거
+                window.location.reload();  // DOM에서 제거
               } else {
                 alert("찜 해제에 실패했습니다.");
               }
