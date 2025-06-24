@@ -24,16 +24,23 @@ body {
     gap: 5px;
   }
   
-  .range-btn {
-    background-color: white;
-    color: #ff5050;
+  select{
     border: none;
-    border-radius: 18px;
-    padding: 5px 10px;
-    font-size: 12px;
-    height: 24px;
-  }
-  
+    outline: none;
+    background-color: white;
+    color: #FF4C4F;
+    width: 100%;
+    height: 30%;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 4px 11px 4px 18px;
+    display: flex;
+    justify-content: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
 
   .main-title {
     font-size: 32px;
@@ -80,6 +87,7 @@ body {
   
   /* 인기 메뉴 (광고)*/
   .hot-menu {
+    width: 100%;
     margin-top: 32px;
     font-weight: bold;
     font-size: 15px;
@@ -106,6 +114,7 @@ body {
   margin: 0 auto 12px;
   background-color: #f3f3f3;
   position: relative;
+  border: 1px solid gray;
 }
 
 .menu-img-ad {
