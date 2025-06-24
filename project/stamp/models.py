@@ -33,15 +33,22 @@ class RiceGrain(models.Model):
 
 @receiver(post_save, sender=Review)
 def create_rice_grain_for_review(sender, instance, created, **kwargs):
+    print("✅ post_save 시그널 호출됨")
     if not created:
         return
 
     profile = instance.writer
-    rice_map, _ = RiceMap.objects.get_or_create(owner=profile)
+
+    # ✅ 가장 최신의 밥지도 가져오기
+    rice_map = RiceMap.objects.filter(owner=profile).order_by('-created_at').first()
+
+    # ❗ 밥지도가 하나도 없는 경우 (이상적인 상황은 아님) → 새로 생성
+    if not rice_map:
+        rice_map = RiceMap.objects.create(owner=profile)
 
     today = timezone.now().date()
 
-    # 오늘 이미 밥풀이 있다면 중단
+    # ✅ 오늘 밥풀이 이미 있으면 중단
     if RiceGrain.objects.filter(rice_map=rice_map, date=today).exists():
         return
 
@@ -52,18 +59,15 @@ def create_rice_grain_for_review(sender, instance, created, **kwargs):
         date=today
     )
 
-    # ✅ 밥풀 수 체크 후 주먹밥 생성
+    # ✅ 밥풀 수 체크 → 9개면 주먹밥 + 맵 종료 + 새 맵 생성
     grain_count = rice_map.rice_grains.count()
-    if grain_count == 9:  # 정확히 9개일 때만 생성
-        # 1. 주먹밥 생성
+    if grain_count == 9:
         Riceball.objects.create(rice_map=rice_map)
-
-        # 2. 현재 맵 완료 처리
         rice_map.finished_at = timezone.now().date()
         rice_map.save()
 
-        # 3. 새로운 밥지도 시작
         RiceMap.objects.create(owner=profile)
+
 
 
 class Riceball(models.Model):
