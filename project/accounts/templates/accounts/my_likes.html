@@ -18,7 +18,7 @@
   <!-- <div class="like-list">
     {% for like in likes %}
       {% if like.menu %}
-        <div class="like-item">
+        <div class="like-item" data-menu-id="{{ like.menu.id }}">
           <a href="{% url 'menu:store_detail' store_id=like.menu.store.id menu_id=like.menu.id %}">
             <div class="image-row">
               {% for i in "123"|make_list %}
@@ -35,8 +35,8 @@
                   <span>리뷰 999+</span>
                 </div>
               </div>
-              <div class="like-icon toggle-like">
-                <i class="far fa-star"></i>
+              <div class="like-icon toggle-like active">
+                <i class="fas fa-star"></i>
               </div>
             </div>
           </a>
@@ -69,8 +69,8 @@
             <span>리뷰 999+</span>
           </div>
         </div>
-        <div class="like-icon toggle-like">
-          <i class="far fa-star"></i>
+        <div class="like-icon toggle-like active">
+          <i class="fas fa-star"></i>
         </div>
       </div>
     </div>
@@ -91,8 +91,8 @@
             <span>리뷰 203</span>
           </div>
         </div>
-        <div class="like-icon toggle-like">
-          <i class="far fa-star"></i>
+        <div class="like-icon toggle-like active">
+          <i class="fas fa-star"></i>
         </div>
       </div>
     </div>
@@ -113,8 +113,8 @@
             <span>리뷰 203</span>
           </div>
         </div>
-        <div class="like-icon toggle-like">
-          <i class="far fa-star"></i>
+        <div class="like-icon toggle-like active">
+          <i class="fas fa-star"></i>
         </div>
       </div>
     </div>
@@ -135,8 +135,8 @@
             <span>리뷰 203</span>
           </div>
         </div>
-        <div class="like-icon toggle-like">
-          <i class="far fa-star"></i>
+        <div class="like-icon toggle-like active">
+          <i class="fas fa-star"></i>
         </div>
       </div>
     </div>
@@ -144,7 +144,6 @@
   </div>
 
   <!-- 여기까지 -->
- 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const likeButtons = document.querySelectorAll(".toggle-like");
@@ -153,20 +152,43 @@
         btn.addEventListener("click", function () {
           const icon = this.querySelector("i");
           const isFilled = icon.classList.contains("fas");
+          const likeItem = this.closest(".like-item");
+          const menuId = likeItem.dataset.menuId;  // data-menu-id 속성 필요
     
           if (isFilled) {
-            // 채워진 별 → 비어 있는 별
-            icon.classList.remove("fas");
-            icon.classList.add("far");
-            this.classList.remove("active");
-          } else {
-            // 비어 있는 별 → 채워진 별
-            icon.classList.remove("far");
-            icon.classList.add("fas");
-            this.classList.add("active");
+            // 찜 해제 요청 (AJAX)
+            fetch(`/accounts/unlike/${menuId}/`, {
+              method: 'POST',
+              headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+              },
+            })
+            .then(res => {
+              if (res.ok) {
+                likeItem.remove();  // DOM에서 제거
+              } else {
+                alert("찜 해제에 실패했습니다.");
+              }
+            });
           }
         });
       });
+    
+      // CSRF 토큰 가져오는 함수
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
     });
     </script>
     
