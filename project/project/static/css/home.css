@@ -128,3 +128,46 @@ body {
 }
 
 
+.radius-dropdown {
+  position: relative;
+  display: inline-block;
+  background-color: #ff4d4f;
+  color: white;
+  border-radius: 15px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.selected-radius {
+  font-weight: bold;
+}
+
+.radius-options {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  color: #ff4d4f;
+  border-radius: 10px;
+  margin-top: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+  width: max-content;
+  text-align: right;
+}
+
+.radius-options a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #ff4d4f;
+  font-size: 14px;
+}
+
+.radius-options a:hover {
+  background-color: #ffeaea;
+  border-radius: 10px;
+}
+
