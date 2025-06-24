@@ -57,10 +57,24 @@
           <p>리뷰는 수정 및 삭제가 불가능합니다.</p>
         </div>
       </div>
-      <button type="submit">등록하기</button>
+      <button type="submit" id="submitBtn" disabled>등록하기</button>
     </form>
   </div>
 
 </body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ratingInputs = document.querySelectorAll('input[name="rating"]');
+    const submitBtn = document.getElementById('submitBtn');
+
+    ratingInputs.forEach(input => {
+      input.addEventListener('change', function () {
+        submitBtn.disabled = false;
+        submitBtn.classList.add('enabled');
+      });
+    });
+  });
+</script>
 
 </html>

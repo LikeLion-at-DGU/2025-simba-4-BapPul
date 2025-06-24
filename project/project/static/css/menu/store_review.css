@@ -100,7 +100,7 @@ label {
     color: white;
 }
 
-.warning{
+.warning {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,30 +110,36 @@ label {
     margin-top: 15px;
 }
 
-p{
+p {
     margin: 0;
 }
 
 
-#warnIcon{
+#warnIcon {
     color: #FF4C4F;
 }
 
-.img-container{
+.img-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-button{
-    width:329px;
+button {
+    width: 329px;
     height: 45px;
     margin: 60px auto 60px auto;
     display: block;
     background-color: #B3B3B3;
-    color:white;
+    color: white;
     font-size: 20px;
     border: none;
     font-weight: 500;
+    cursor: not-allowed;
+}
+
+button.enabled {
+    background-color: #FF4C4F;
+    cursor: pointer;
 }
