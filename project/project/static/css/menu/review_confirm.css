@@ -51,7 +51,6 @@ body {
         );
 
     z-index: 0;
-    pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -152,7 +151,7 @@ body {
     color: #333;
     max-width: 80%;
     font-weight: 600;
-    margin: 1.5rem auto 0;
+    margin: 1.7rem auto 0;
     word-break: keep-all;
 }
 
@@ -164,4 +163,26 @@ body {
 
 .second-line {
     margin-top: 0.3em;
+}
+
+.image-box {
+    position: relative;
+}
+
+.bookmark-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    color: lightgray;
+    /* 기본: 회색 */
+}
+
+.bookmark-btn.active {
+    color: #FF4C4F;
+    /* 찜한 경우: 빨간색 */
 }
