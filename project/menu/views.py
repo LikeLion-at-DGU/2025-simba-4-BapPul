@@ -62,15 +62,16 @@ def store_review(request, store_id, menu_id):
     if request.method == 'POST':
         rating = request.POST.get('rating')
         image = request.FILES.get('photo')
-        Review.objects.create(
+        review = Review.objects.create(
             writer=request.user.profile,
             menu=menu,
             rating=rating,
             image=image,
         )
 
-        # ✅ 리뷰 작성 끝났으면 리뷰 확인 화면으로 redirect
-        return redirect('menu:review_confirm', store_id=store.id, menu_id=menu.id)
+        # 🔥 reverse 사용해서 URL 생성 + review_id 쿼리파라미터로 전달
+        redirect_url = reverse('menu:review_confirm', args=[store.id, menu.id])
+        return redirect(f"{redirect_url}?review_id={review.id}")
 
     return render(request, 'menu/store_review.html', {
         'store': store,
@@ -82,7 +83,11 @@ def review_confirm(request, store_id, menu_id):
     store = get_object_or_404(Store, id=store_id)
     menu = get_object_or_404(Menu, id=menu_id)
 
-    review = Review.objects.filter(menu=menu, writer=request.user.profile).order_by('-created_at').first()
+    review_id = request.GET.get('review_id')
+    if review_id:
+        review = get_object_or_404(Review, id=review_id, writer=request.user.profile, menu=menu)
+    else:
+        review = Review.objects.filter(menu=menu, writer=request.user.profile).order_by('-created_at').first()
 
     stats = Review.objects.filter(menu__store=store).aggregate(
         avg_rating=Avg('rating'),
