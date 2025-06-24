@@ -1,21 +1,35 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>밥지도 메인</title>
-  <script>
-    // 2초 뒤 /stamp/map 경로로 이동
-    setTimeout(function() {
-      window.location.href = "/stamp/map";
-    }, 2000);
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>firstpage</title>
+    <link rel="stylesheet" href="{% static 'css/stamp/rice_map_main.css' %}">
 </head>
-<body style="background-color: #ff4d4d; color: white; text-align: center;">
-  <h1>밥지도</h1>
-  <div>
-    <!-- 이미지 또는 일러스트 위치 -->
-    <img src="#" alt="밥지도" style="width: 60%;">
-  </div>
-  <p>하루에 하나씩 사진 리뷰 남기고<br>포인트 받자!</p>
+
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <h1>밥지도</h1>
+            <img src="{% static 'assets/img/logo.png' %}" alt="샘플 이미지">
+        </div>
+        <div class="bottom">
+            <h3>하루에 하나씩 사진 리뷰 남기고<br>포인트 받자 !</h3>
+        </div>
+    </div>
 </body>
+
+
+<script>
+  // 2초 뒤 /stamp/map 경로로 이동
+  setTimeout(function() {
+    window.location.href = "/stamp/map";
+  }, 2000);
+</script>
+
+
 </html>
+

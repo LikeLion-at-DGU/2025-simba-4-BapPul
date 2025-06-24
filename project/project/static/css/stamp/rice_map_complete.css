@@ -1,0 +1,101 @@
+html,
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 10% 3% 3% 3%;
+    height: 40px;
+    margin: 0;
+    font-weight: 600;
+    color: #FF4C4F;
+}
+
+body {
+    width: 100%;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    overflow: hidden;
+}
+
+.circle-container {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    left: 50%;
+    /* 가로 중앙 정렬 */
+    transform: translateX(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    background: radial-gradient(circle,
+            rgba(255, 45, 48, 0.282) 50%,
+            rgba(255, 114, 116, 0.198) 60%,
+            rgba(255, 166, 166, 0.185) 65%,
+            transparent 70%
+            /* 끝: 완전히 투명W*/
+        );
+
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-box {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    height: 240px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.stamp_date{
+    margin-top: 20px;
+}
+
+.image-box img {
+    width: 252px;
+    height: 231px;
+}
+
+.container h1 {
+    color: #FF4C4F;
+}
+
+.coin {
+    font-size: 20px;
+    color: #FF4C4F;
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.btn {
+    display: inline-block;
+    width: 100%;
+    height: 41px;
+    background-color: #FF4C4F;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 40px;
+}
