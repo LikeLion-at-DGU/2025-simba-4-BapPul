@@ -13,37 +13,50 @@
 
 <body>
   <header>
-    <i class="fa-solid fa-chevron-left"></i>
+    <a href="/search/">
+      <i class="fa-solid fa-xmark"></i>
+    </a>
     <p>리뷰</p>
     <p>ㅤ</p>
   </header>
 
   <div class="container">
+    <div style="height: 52%;"></div>
 
-    <!-- 🔴 원형 배경 포함한 이미지 박스 -->
+    <!-- 원형 배경 포함한 이미지 박스 -->
     <div class="circle-container">
-    </div>
-    <div class="card">
-      <div class="image-box">
-        {% if image %}
-        <img src="{{ image.url }}" alt="사용자 등록 이미지">
-        {% else %}
-        <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
-        {% endif %}
+      <div class="card">
+        <div class="image-box">
+          <form method="POST" action="{% url 'menu:like_menu' menu.id %}?from=review_confirm" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="bookmark-btn {% if is_liked %}active{% endif %}">
+              <i class="fa-solid fa-star"></i>
+            </button>
+          </form>
 
-        <div class="menu-info">
-          <strong id="menu-name">{{ menu.name }}</strong>
-          <span id="store-name">{{ store.name }}</span>
-        </div>
-        <div class="review-info">
-          <p id="store-status">영업중</p>
-          <p id="store-avg-review">
-            <span style="color: #FF4C4F;">★</span>{{ rating }}
-          </p>
-          <p id="store-review-count">리뷰 {{ review_counting }}</p>
+          {% if image %}
+          <img src="{{ image.url }}" alt="사용자 등록 이미지">
+          {% else %}
+          <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
+          {% endif %}
+
+
+          <div class="menu-info">
+            <strong id="menu-name">{{ menu.name }}</strong>
+            <span id="store-name">{{ store.name }}</span>
+          </div>
+
+          <div class="review-info">
+            <p id="store-status">영업중</p>
+            <p id="store-avg-review">
+              <span style="color: #FF4C4F;">★</span>{{ rating }}
+            </p>
+            <p id="store-review-count">리뷰 {{ review_counting }}</p>
+          </div>
         </div>
       </div>
     </div>
+
 
 
     <div class="stars">
@@ -57,30 +70,38 @@
 
     <p id="confirmMsg" class="styled-message">
       <span class="nickname">{{ nickname }}</span><span class="black">님</span>의
-      {% if review.image %}
-        사진 리뷰가 등록되었습니다.
-      {% else %}
-        별점 리뷰가 등록되었습니다.
-      {% endif %}
+      리뷰가 등록되었습니다.
     </p>
 
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.addEventListener('click', function () {
-        const confirmMsg = document.getElementById('confirmMsg');
-        const nickname = document.querySelector('.nickname')?.textContent || '';
-        if (confirmMsg && nickname) {
-          confirmMsg.innerHTML = `
-            <div>
-              <span class="nickname">${nickname}</span><span class="black">님!</span>
-            </div>
-            <div class="second-line">오늘의 리뷰가 밥지도에 등록되었어요!</div>
-          `;
+
+    function fitTextToWidth(selector, minSize = 10) {
+      document.querySelectorAll(selector).forEach(el => {
+        const parent = el.parentElement;
+        const originalSize = parseFloat(getComputedStyle(el).fontSize);
+        let fontSize = originalSize;
+
+        // 임시 설정: 줄어드는 동안 overflow 감지되게
+        el.style.whiteSpace = 'nowrap';
+        el.style.overflow = 'hidden';
+
+        while (el.scrollWidth > el.offsetWidth && fontSize > minSize) {
+          fontSize -= 0.5;
+          el.style.fontSize = fontSize + "px";
         }
-      }, { once: true });
+      });
+    }
+
+    window.addEventListener("load", () => {
+      fitTextToWidth("#menu-name", 12);  // 메뉴는 최소 12px까지만
+      fitTextToWidth("#store-name", 10); // 가게는 최소 10px까지만
     });
+
+    setTimeout(function () {
+      window.location.href = "/search/";
+    }, 5000);  // 3000ms = 3초
   </script>
 
 </body>

@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -16,7 +17,7 @@ header {
     font-weight: 600;
 }
 
-body{
+body {
     width: 100%;
     text-align: center;
 }
@@ -28,15 +29,16 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;        /* 세로 위치는 유지 */
-    overflow: hidden;       /* 넘치는 원 잘라냄 */
+    margin-top: 10%;
+    overflow: hidden;
 }
 
 .circle-container {
     position: absolute;
     width: 450px;
     height: 450px;
-    left: 50%;              /* 가로 중앙 정렬 */
+    left: 50%;
+    /* 가로 중앙 정렬 */
     transform: translateX(-50%);
     border-radius: 50%;
     overflow: hidden;
@@ -48,8 +50,10 @@ body{
             /* 끝: 완전히 투명W*/
         );
 
-        z-index: 0;  
-        pointer-events: none;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .image-box img {
@@ -59,7 +63,6 @@ body{
 }
 
 .card {
-    position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -67,66 +70,118 @@ body{
     height: 240px;
     background-color: white;
     border-radius: 10px;
-    margin-top: 30%;
 }
 
-.menu-info{
+.menu-info {
     display: flex;
     justify-content: space-around;
-    align-items: end;
+    align-items: flex-end;
     margin-top: 4%;
+    gap: 8px;
 }
 
-#menu-name{
+#menu-name,
+#store-name {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+/* 기본 스타일 복구 */
+#menu-name {
     font-size: 22px;
     font-weight: 600;
-    
+    color: black;
+    max-width: 120px;
 }
 
-#store-name{
+#store-name {
     font-size: 16px;
-    color: #8A8A8A; 
     font-weight: 600;
+    color: #8A8A8A;
+    max-width: 100px;
 }
 
-.review-info{
+
+.review-info {
     display: flex;
     justify-content: space-around;
     margin: 1% 2%;
     align-items: center;
-    
+
 }
 
-.review-info p{
+.review-info p {
     margin: 0;
 }
 
-#store-status{
+#store-status {
     font-size: 16px;
     font-weight: 600;
 }
 
-#store-avg-review{
+#store-avg-review {
     font-size: 12px;
     font-weight: 600;
 }
 
-#store-review-count{
+#store-review-count {
     font-size: 15px;
     font-weight: 600;
 }
 
-.stars{
+.stars {
     display: flex;
     margin-top: 15%;
     font-size: 30px;
     gap: 25px;
 }
 
-.confirm-msg{
+.confirm-msg {
     display: flex;
     margin-top: 10%;
     font-size: 15px;
     font-weight: 600;
 }
 
+#confirmMsg {
+    font-size: 15px;
+    text-align: center;
+    color: #333;
+    max-width: 80%;
+    font-weight: 600;
+    margin: 1.7rem auto 0;
+    word-break: keep-all;
+}
+
+.nickname {
+    color: #FF4C4F;
+    font-weight: bold;
+}
+
+
+.second-line {
+    margin-top: 0.3em;
+}
+
+.image-box {
+    position: relative;
+}
+
+.bookmark-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    color: lightgray;
+    /* 기본: 회색 */
+}
+
+.bookmark-btn.active {
+    color: #FFE310;
+}

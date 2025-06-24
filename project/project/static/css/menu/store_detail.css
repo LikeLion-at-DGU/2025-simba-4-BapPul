@@ -182,6 +182,8 @@ form {
     color: white;
     border: none;
     font-weight: 500;
+    margin-bottom: 50px;
+    border-radius: 12px;
 }
 
 .review-list{
