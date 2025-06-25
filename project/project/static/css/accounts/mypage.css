@@ -139,7 +139,8 @@ color: white;
 
 .latest-review{
   width: 349px;
-  height: 158px;
+  min-height: 158px;
+  height: fit-content;
   background: linear-gradient(130deg, #ff8b8d 2.67%, rgba(255, 45, 48, 0.855) 58.4%);
   border-radius: 20px;
 }
@@ -162,7 +163,7 @@ color: white;
 .second-line{
   display: flex;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   flex-direction: column;
   align-items: center;
   color: white;
@@ -170,6 +171,7 @@ color: white;
   margin-top: 10px;
   gap: 15px;
   font-size: 15px;
+  padding-bottom: 30px;
 }
 
 .latest-review i{
@@ -184,6 +186,7 @@ color: white;
   cursor: pointer;
 }
 
-.img{
-  
+.second-line img{
+  max-width: 280px;
+  max-height: 100px;
 }

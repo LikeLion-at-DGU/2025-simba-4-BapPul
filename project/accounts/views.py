@@ -94,7 +94,6 @@ def mypage(request, id):
     }
     return render(request, 'accounts/mypage.html', context)
 
-
 def my_likes(request, id):
     user = get_object_or_404(User, pk=id)
     profile = user.profile

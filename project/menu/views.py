@@ -55,6 +55,8 @@ def store_location(request, store_id, menu_id):
     return render(request, 'menu/store_location.html', context)
 
 
+from django.utils import timezone  # 혹시 시간 조건도 필요한 경우 대비
+
 def store_review(request, store_id, menu_id):
     store = get_object_or_404(Store, id=store_id)
     menu = get_object_or_404(Menu, id=menu_id)
@@ -69,6 +71,17 @@ def store_review(request, store_id, menu_id):
             image=image,
         )
 
+        # ✅ VisitLog에서 해당 메뉴에 대한 가장 최근 기록을 reviewed=True로 변경
+        visit = VisitLog.objects.filter(
+            user=request.user.profile,
+            menu=menu,
+            reviewed=False  # 혹시 모르니 아직 리뷰 안 한 것만
+        ).order_by('-visited_at').first()
+
+        if visit:
+            visit.reviewed = True
+            visit.save()
+
         # 🔥 reverse 사용해서 URL 생성 + review_id 쿼리파라미터로 전달
         redirect_url = reverse('menu:review_confirm', args=[store.id, menu.id])
         return redirect(f"{redirect_url}?review_id={review.id}")
@@ -77,7 +90,7 @@ def store_review(request, store_id, menu_id):
         'store': store,
         'menu': menu,
     })
-    
+
 
 def review_confirm(request, store_id, menu_id):
     store = get_object_or_404(Store, id=store_id)
