@@ -14,11 +14,10 @@
 
 
 <body>
-  <header>
-    <i class="fa-solid fa-chevron-left" onclick="history.back()" style="cursor: pointer;"></i>
-    <p>상세정보</p>
-    <p>ㅤ</p>
-    </header>
+  <div class="top-bar">
+    <i class="fas fa-chevron-left" onclick="history.back()" style="cursor: pointer;"></i>
+    <div class="top-bar-title">상세정보</div>
+  </div>
 
 
 
@@ -43,7 +42,7 @@
   </div>
 
   <div class="store-info">
-    <h3>정보</h3>
+    <h3 class="info-title">정보</h3>
     <div class="info-detail">
       <i class="fa-solid fa-location-dot"></i>
       <p>{{ store.address }}</p>
