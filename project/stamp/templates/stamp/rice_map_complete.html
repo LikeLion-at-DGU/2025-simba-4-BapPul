@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/stamp/rice_map_complete.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <a href="{% url 'menu:store_location' store.id menu.id %}">
+            <i class="fa-solid fa-chevron-left" href=""></i>
+        </a>
+        <p>리뷰</p>
+        <p>ㅤ</p>
+    </header>
+
+    <div class="container">
+    <div class="circle-container">
+        <div class="image-box">
+            <img src="{% static 'assets/img/logo.png' %}" alt="밥플이">
+            <div class="stamp_date">
+                <p>날짜</p> <!--나중에 연결 필요함!!-->
+            </div>
+        </div>
+    </div>
+
+    <h1>주먹밥 완성 !</h1>
+    <div class="coin">
+        <h3>+ 1000</h3>
+        <img src="{% static 'images/coin.png' %}" alt="코인이미지">
+    </div>
+
+    <a href="{% url 'stamp: rice_map'}" class="btn">새로운 밥지도가 열렸습니다</a>
+
+</div>
+
+</body>
+
+</html>
