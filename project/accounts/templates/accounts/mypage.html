@@ -78,12 +78,12 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.querySelector('.close-icon');
-    const reviewBox = document.querySelector('.latest-review');
+    const reviewBox = document.querySelector('.review-click');  // 변경: 더 상위 요소 선택
 
     if (closeBtn && reviewBox) {
       closeBtn.addEventListener('click', function (e) {
-        e.preventDefault(); // 혹시 a 태그 등 클릭 방지용
-        reviewBox.style.display = 'none';
+        e.preventDefault();
+        reviewBox.style.display = 'none';  // 리뷰 전체 영역 제거
       });
     }
   });
