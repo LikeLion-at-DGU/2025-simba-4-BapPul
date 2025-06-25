@@ -23,7 +23,7 @@
           <p class="school">{{ user.profile.school.name }}</p>
   
           <div style="display: flex; align-items: center; gap: 6px;">
-            <h2>{{ user.username }} 님</h2>
+            <h2>{{ user.profile.nickname }} 님</h2>
             <a href="{% url 'accounts:edit_profile' %}" class="edit-icon" style="color: white; font-size: 18px; margin-left:6px;" title="프로필 수정">
               <i class="fa-regular fa-pen-to-square"></i>
             </a>
