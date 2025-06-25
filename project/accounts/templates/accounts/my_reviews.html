@@ -17,7 +17,7 @@
 
   <!-- 리뷰 리스트 -->
   <!-- 이부분 활성화시켜야함 -->
-<!-- <div class="review-container">
+ <div class="review-container">
   {% for review in reviews %}
   <div class="review-item">
     <div class="review-plain">
@@ -37,9 +37,9 @@
   {% empty %}
   <p style="margin: 20px;">작성한 리뷰가 없습니다.</p>
   {% endfor %}
-</div> -->
+</div>
 
-<!-- 여기서부터 하드코딩부분 -->
+{% comment %} <!-- 여기서부터 하드코딩부분 -->
   <div class="review-container">
     <!-- 별점 리뷰 1 -->
     <div class="review-item">
@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   <!-- 여기까지 하드코딩 부분 -->
 
