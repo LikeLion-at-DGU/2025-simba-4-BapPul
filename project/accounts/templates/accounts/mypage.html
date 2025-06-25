@@ -30,8 +30,7 @@
             </a>
           </div>
 
-          <p style="margin-top: 10px">주먹밥 개수 🍙 <strong style="margin-left: 8px; font-size: 18px;">{{ riceball_count
-              }}개</strong></p>
+          <p style="margin-top: 10px">주먹밥 개수 🍙 <strong style="margin-left: 8px; font-size: 18px;">{{riceball_count}}개</strong></p>
         </div>
 
         <!-- 프로필 아이콘 -->
@@ -44,21 +43,26 @@
   </div>
 
   {% if latest_review %}
-  <a class="review-click" href="#">
-    <!--메뉴 리뷰로 이동하는 링크 위쪽 href에 넣어주세요-->
-    <div class="review-container">
-      <div class="latest-review">
-        <div class="top-line">
-          <i class="fa-solid fa-xmark close-icon"></i> <!-- class 추가 -->
-        </div>
-        <div class="second-line">
-          <p><strong>메뉴 이름</strong>이 리뷰를 기다리고 있어요!</p>
-          <img src="#" alt="메뉴 이미지">
+    <a class="review-click"
+      href="{% url 'menu:store_review' latest_review.menu.store.id latest_review.menu.id %}">
+      <div class="review-container">
+        <div class="latest-review">
+          <div class="top-line">
+            <i class="fa-solid fa-xmark close-icon"></i>
+          </div>
+          <div class="second-line">
+            <p><strong>{{ latest_review.menu.name }}</strong>이 리뷰를 기다리고 있어요!</p>
+            {% if latest_review.menu.image %}
+              <img src="{{ latest_review.menu.image.url }}" alt="메뉴 이미지">
+            {% else %}
+              <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
+            {% endif %}
+          </div>
         </div>
       </div>
-    </div>
-  </a>
+    </a>
   {% endif %}
+
 
 
   <div class="menu-list">

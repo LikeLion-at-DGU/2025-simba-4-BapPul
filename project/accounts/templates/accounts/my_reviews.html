@@ -21,7 +21,7 @@
   {% for review in reviews %}
   <div class="review-item">
     <div class="review-plain">
-      <img class="review-thumbnail" src="{% if review.image %}{{ review.image.url }}{% else %}https://via.placeholder.com/60{% endif %}" alt="리뷰 이미지">
+      <img class="review-thumbnail"src="{% if review.image %}{{ review.image.url }}{% else %}{% static 'images/menu_default.png' %}{% endif %}" alt="리뷰 이미지">
       <div class="review-plain-text">
         <div class="review-stars">
           {% for i in "12345"|slice:":" %}
