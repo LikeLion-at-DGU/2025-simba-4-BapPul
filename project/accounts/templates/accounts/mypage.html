@@ -6,65 +6,61 @@
 <head>
   <meta charset="UTF-8">
   <title>마이페이지</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link rel="stylesheet" href="{% static 'css/accounts/mypage.css' %}">
-  
+
 </head>
 
 <body>
 
   <div class="mypage-header">
     <div class="user-info">
-  
+
       <div class="profile-top">
         <!-- 학교, 이름, 주먹밥 개수 표시 부분 -->
         <div class="username">
           <p class="school">{{ user.profile.school.name }}</p>
-  
+
           <div style="display: flex; align-items: center; gap: 6px;">
             <h2>{{ user.profile.nickname }} 님</h2>
-            <a href="{% url 'accounts:edit_profile' %}" class="edit-icon" style="color: white; font-size: 18px; margin-left:6px;" title="프로필 수정">
+            <a href="{% url 'accounts:edit_profile' %}" class="edit-icon"
+              style="color: white; font-size: 18px; margin-left:6px;" title="프로필 수정">
               <i class="fa-regular fa-pen-to-square"></i>
             </a>
           </div>
-  
-          <p style="margin-top: 10px">주먹밥 개수 🍙 <strong style="margin-left: 8px; font-size: 18px;">{{ riceball_count }}개</strong></p>
+
+          <p style="margin-top: 10px">주먹밥 개수 🍙 <strong style="margin-left: 8px; font-size: 18px;">{{ riceball_count
+              }}개</strong></p>
         </div>
-  
+
         <!-- 프로필 아이콘 -->
         <div class="profile-pic default-icon" style="margin-left: 28px;">
           <i class="fa fa-user"></i>
         </div>
       </div>
-  
+
     </div>
   </div>
-  {% if latest_review %}Add commentMore actions
-    <div class="latest-review">
-      <p><strong>메뉴 이름</strong> 이 리뷰를 기다리고 있어요!</p>
-      <div class="review-placeholder">[이미지]</div>
-      <button class="close-button">X</button>
-    </div>
+
+
+  <a class="review-click" href="#">
+      <!--메뉴 리뷰로 이동하는 링크 위쪽 href에 넣어주세요-->
+    <div class="review-container">
       <div class="latest-review">
-        <p><strong>{{ latest_review.menu.name }}</strong> 이 리뷰를 기다리고 있어요!</p>
-        <p>가게: {{ latest_review.store.name }}</p>
-
-        {% if latest_review.menu.image %}
-          <div class="review-placeholder">
-            <img src="{{ latest_review.menu.image.url }}" alt="메뉴 이미지" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
-          </div>
-        {% else %}
-          <div class="review-placeholder">[이미지 없음]</div>
+        {% if latest_review %}
+        <div class="top-line">
+          <i class="fa-solid fa-xmark close-icon"></i>  <!-- class 추가 -->
+        </div>
+        <div class="second-line">
+          <p><strong>메뉴 이름</strong>이 리뷰를 기다리고 있어요!</p>
+          <img src="#" alt="메뉴 이미지">
+        </div>
         {% endif %}
-
-        <a href="{% url 'menu:store_review' store_id=latest_review.store.id menu_id=latest_review.menu.id %}">
-          <button class="review-button">✍️ 리뷰 작성하러 가기</button>
-        </a>
-        
-        <button class="close-button">X</button>
       </div>
-    {% endif %}
+    </div>
+  </a>
+
 
   <div class="menu-list">
     <a href="{% url 'accounts:my_likes' request.user.id %}" class="menu-item">나의 찜<span>›</span></a>
@@ -79,5 +75,19 @@
   {% include 'shared/_navbar.html' %}
 
 </body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const closeBtn = document.querySelector('.close-icon');
+    const reviewBox = document.querySelector('.latest-review');
+
+    if (closeBtn && reviewBox) {
+      closeBtn.addEventListener('click', function (e) {
+        e.preventDefault(); // 혹시 a 태그 등 클릭 방지용
+        reviewBox.style.display = 'none';
+      });
+    }
+  });
+</script>
 
 </html>
