@@ -43,23 +43,22 @@
     </div>
   </div>
 
-
+  {% if latest_review %}
   <a class="review-click" href="#">
-      <!--메뉴 리뷰로 이동하는 링크 위쪽 href에 넣어주세요-->
+    <!--메뉴 리뷰로 이동하는 링크 위쪽 href에 넣어주세요-->
     <div class="review-container">
       <div class="latest-review">
-        {% if latest_review %}
         <div class="top-line">
-          <i class="fa-solid fa-xmark close-icon"></i>  <!-- class 추가 -->
+          <i class="fa-solid fa-xmark close-icon"></i> <!-- class 추가 -->
         </div>
         <div class="second-line">
           <p><strong>메뉴 이름</strong>이 리뷰를 기다리고 있어요!</p>
           <img src="#" alt="메뉴 이미지">
         </div>
-        {% endif %}
       </div>
     </div>
   </a>
+  {% endif %}
 
 
   <div class="menu-list">
