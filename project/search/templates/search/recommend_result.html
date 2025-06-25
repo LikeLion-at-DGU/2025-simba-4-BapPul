@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>추천 결과</title>
   <link rel="stylesheet" href="{% static 'css/search/recommend_result.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   <style>
     a.menu-card {
@@ -79,6 +81,7 @@
 
       {% endfor %} {% endcomment %}
 
+      <div class="menu-section">
       <div class="menu-grid">
       {% for m in menus %}
         <a href="{% url 'menu:store_detail' store_id=m.menu.store.id menu_id=m.menu.id %}" class="menu-card">
@@ -97,10 +100,17 @@
               <span class="rating">★ {{ m.average_rating }}</span>
               <span class="review">리뷰 {{ m.review_count }}+</span>
             </p>
+          
+            
+            
           </div>
         </a>
+        
+        
       {% endfor %}
       </div>
+    </div>
+
 
 
       <!-- 하드코딩된 카드 리스트 -->
@@ -177,4 +187,68 @@
     let price = getCurrentPrice();
     moveToNewPrice(price + 1000);
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const likeButtons = document.querySelectorAll(".toggle-like");
+  
+    likeButtons.forEach(btn => {
+      btn.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+  
+        const icon = this.querySelector("i");
+        const isFilled = icon.classList.contains("fas");
+        const menuId = this.dataset.menuId;  // 여기서 직접 가져옴
+  
+        if (isFilled) {
+          // 찜 해제 요청 (AJAX)
+          fetch(`/accounts/unlike/${menuId}/`, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': getCookie('csrftoken'),
+            },
+          })
+          .then(res => {
+            if (res.ok) {
+              window.location.reload();
+            } else {
+              alert("찜 해제에 실패했습니다.");
+            }
+          });
+        } else {
+          // 찜 추가 요청 (옵션)
+          fetch(`/accounts/like/${menuId}/`, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': getCookie('csrftoken'),
+            },
+          })
+          .then(res => {
+            if (res.ok) {
+              window.location.reload();
+            } else {
+              alert("찜 추가에 실패했습니다.");
+            }
+          });
+        }
+      });
+    });
+  
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+  });
+  
+
 </script>
