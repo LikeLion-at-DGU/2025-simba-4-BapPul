@@ -20,7 +20,7 @@
         <p class="topBar-right"></p>
     </div>
 
-    <form action="" method="post">
+    <form action="{% url 'accounts:signup' %}" method="post">
         {% csrf_token %}
         <div class="IdPw">
             <div class="ID">
