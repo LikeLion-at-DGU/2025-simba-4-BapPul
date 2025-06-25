@@ -136,3 +136,47 @@ margin-bottom: 8px;
 font-size: 15px;
 color: white;
 }
+
+.latest-review{
+  width: 349px;
+  height: 158px;
+  background: linear-gradient(130deg, #ffaeaf 2.67%, rgba(255, 51, 54, 0.797) 58.4%);
+  border-radius: 20px;
+}
+
+.review-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.top-line{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.second-line{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 15px;
+  margin-top: 10px;
+  gap: 15px;
+}
+
+.latest-review i{
+  color: white;
+  font-size: 15px;
+  margin: 10px 20px 0 0;
+}
+
+
+.review-click{
+  text-decoration: none;
+  cursor: pointer;
+}
