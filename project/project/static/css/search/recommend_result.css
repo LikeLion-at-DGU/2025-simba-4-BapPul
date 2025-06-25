@@ -74,7 +74,7 @@ body {
 
 /* 메뉴 카드 부분 */
 .menu-section {
-  background-color: #ff4d4d;
+  background-color: white;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.2);
@@ -91,14 +91,11 @@ body {
   box-sizing: border-box;
 }
 
-
-
 .menu-card {
   background-color: white;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .menu-image {
@@ -117,7 +114,8 @@ body {
   border-radius: 8px;
 }
 
-.menu-name, .store-name {
+.menu-name,
+.store-name {
   margin: 2px 0;
   font-size: 14px;
 }
@@ -136,4 +134,13 @@ body {
   margin-top: 20px;
   color: white;
   font-size: 15px;
+}
+
+.like-icon {
+  font-size: 20px;
+  color: #ccc;
+}
+
+.like-icon.active {
+  color: #ff4c4f;
 }
