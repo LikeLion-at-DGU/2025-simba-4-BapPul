@@ -13,7 +13,7 @@
 
     <!-- 상단 포인트 -->
     <h3 class="point-text">
-      지금까지 주먹밥으로 모은 포인트:
+      지금까지 <b>주먹밥으로</b> 모은 포인트:
       <span class="point-value">{{ total_point }}</span>
       <img src="{% static 'assets/img/coin.png' %}" alt="코인 이미지" class="coin-img">
     </h3>
@@ -22,76 +22,58 @@
     <div class="rice-map-wrapper">
       <div class="rice-map-header">
         <span class="map-title">밥지도</span>
-        <span class="map-date">{{ current_rice_map.created_at|date:"Y.m.d" }} 오픈</span>
+        <span class="map-date">
+          {% if current_rice_map %}
+            {{ current_rice_map.created_at|date:"Y.m.d" }} 오픈
+          {% else %}
+            아직 시작한 밥지도가 없어요
+          {% endif %}
+        </span>
       </div>
 
-      <!-- {# 실제 백엔드용 백그라운드 주석 처리 #}
-      {# <img src="{% static 'assets/img/map_component.svg' %}" alt="밥지도 배경" class="map-bg"> #}
+      {# 밥지도 배경 주석 처리 #}
+      <img src="{% static 'assets/img/map_component.svg' %}" alt="밥지도 배경" class="map-bg">
 
       {% for grain in rice_grains %}
-        {% if grain.stamped %}
-          {% if forloop.counter <= 3 or forloop.counter >= 7 %}
-            <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-{{ forloop.counter }}">
-          {% else %}
-            <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-{{ forloop.counter }}">
-          {% endif %}
+        {% if forloop.counter <= 3 or forloop.counter >= 7 %}
+          <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-{{ forloop.counter }}">
+        {% else %}
+          <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-{{ forloop.counter }}">
         {% endif %}
-      {% endfor %} -->
-
-      <!-- 밥지도 안의 밥알 하드코딩 여기부터 -->
-      <img src="{% static 'assets/img/map_component.svg' %}" class="map-bg" alt="배경">
-      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-1">
-      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-2">
-      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-3">
-      <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-4">
-      <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-5">
-      <img src="{% static 'assets/img/bappul_left.svg' %}" class="grain-char grain-6">
-      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-7">
-      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-8">
-      <img src="{% static 'assets/img/bappul_right.svg' %}" class="grain-char grain-9">
+      {% endfor %}
     </div>
-    <!-- 여기까지 하드코딩 -->
+      <!-- 주먹밥 개수 및 사용자 이름 -->
+      {% if request.user.is_authenticated and request.user.profile %}
+        <p class="riceball-history-title">
+          <span style="color: red;">{{ request.user.profile.nickname }}</span>님 현재 주먹밥을 <b>{{ riceball_count }}</b>개 만들었어요!
+        </p>
+      {% else %}
+        <p class="riceball-history-title">
+          <span style="color: gray;">로그인이 필요합니다</span>
+        </p>
+      {% endif %}
 
-    <!-- 주먹밥 -->
-    <p class="riceball-history-title">
-      <span style="color: red;">{{ request.user.profile.nickname }}</span>님 현재 주먹밥을 <b>{{ riceball_count }}</b>개 만들었어요!
-    </p>
 
-<!-- 주먹밥 하드코딩 여기부터 -->
-<div class="riceball-history">
-  <div class="riceball-box">
-    <img src="{% static 'assets/img/rice_ball.svg' %}" alt="주먹밥">
-    <p>2025/03/02<br>~ 2025/05/15</p>
-  </div>
-  <div class="riceball-box">
-    <img src="{% static 'assets/img/rice_ball.svg' %}" alt="주먹밥">
-    <p>2025/03/02<br>~ 2025/05/15</p>
-  </div>
-  <div class="riceball-box">
-    <img src="{% static 'assets/img/rice_ball.svg' %}" alt="주먹밥">
-    <p>2025/03/02<br>~ 2025/05/15</p>
-  </div>
-</div>
-<!-- 여기까지 하드코딩 -->
-
+    <!-- 주먹밥 기록 -->
     <div class="riceball-history">
-      {% for map in past_rice_maps %}
+      {% for riceball in past_riceballs %}
         <div class="riceball-box">
           <img src="{% static 'assets/img/rice_ball.svg' %}" alt="주먹밥">
-          <p>{{ map.created_at|date:"Y/m/d" }}<br>~ {{ map.finished_at|date:"Y/m/d" }}</p>
+          <p>
+            {{ riceball.rice_map.created_at|date:"Y/m/d" }}<br>
+            ~ {{ riceball.rice_map.finished_at|date:"Y/m/d" }}
+          </p>
         </div>
       {% empty %}
-        <p>완료된 밥지도가 없습니다.</p>
+        <p>완료된 주먹밥이 없습니다.</p>
       {% endfor %}
     </div>
 
+
+    <!-- 하단 네비 -->
     <div style="margin-bottom: 80px;"></div>
     {% include 'shared/_navbar.html' %}
+
   </div>
-
-
-
-
-
 </body>
 </html>

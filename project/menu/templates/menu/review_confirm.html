@@ -34,10 +34,10 @@
             </button>
           </form>
 
-          {% if image %}
-          <img src="{{ image.url }}" alt="사용자 등록 이미지">
+          {% if review.image %}
+          <img src="{{ review.image.url }}" alt="사용자 등록 이미지">
           {% else %}
-          <img src="{% static 'images/default_review.png' %}" alt="기본 이미지">
+          <img src="{% static 'images/menu_default.png' %}" alt="기본 이미지">
           {% endif %}
 
 
