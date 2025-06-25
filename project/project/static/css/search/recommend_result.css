@@ -135,3 +135,12 @@ body {
   color: white;
   font-size: 15px;
 }
+
+.like-icon {
+  font-size: 20px;
+  color: #ccc;
+}
+
+.like-icon.active {
+  color: #ff4c4f;
+}
