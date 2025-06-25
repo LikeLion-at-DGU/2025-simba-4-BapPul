@@ -7,7 +7,7 @@ let userSchool = document.getElementById('user-school');
 const button = document.getElementById("signupBtn");
 
 function checkId(value) {
-    return value.length <= 8 &&
+    return 
         /[A-Za-z]/.test(value) &&
         /[0-9]/.test(value) &&
         /^[A-Za-z0-9]+$/.test(value);
