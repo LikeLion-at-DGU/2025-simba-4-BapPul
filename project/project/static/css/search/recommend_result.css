@@ -1,140 +1,139 @@
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #fff;
-  }
-  
-  .top-nav {
-    padding: 16px;
-  }
-  
-  .back-btn {
-    text-decoration: none;
-    color: black;
-    font-size: 24px;
-  }
-  
-  .container {
-    padding: 20px;
-  }
-  
-  .sub-title {
-    text-align: center;
-    font-size: 16px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .price-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 35px;
-  }
-  
-  .price-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 24px;
-    border: none;
-    background-color: #f55;
-    color: white;
-    border-radius: 50%;
-    margin: 0 10px;
-  }
-  
-  .category-filter {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 40px;
-  }
-  
-  .category-btn {
-    padding: 6px 14px;
-    border: 2px solid #f55;
-    border-radius: 20px;
-    background-color: white;
-    color: #f55;
-    font-weight: bold;
-  }
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #fff;
+}
 
-  .category-btn:hover {
-    background-color: #f55;
-    color: white;
-  }
-  
-  .category-btn.active {
-    background-color: #f55;
-    color: white;
-  }
-  
-  /* 메뉴 카드 부분 */
-  .menu-section {
-    background-color: #ff4d4d;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.2);
-    padding: 30px 0 50px 0;
-  }
-  
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 */
-    gap: 20px;
-    max-width: 500px;
-    margin: 0 auto; /* 가운데 정렬 */
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
-  
-  
+.top-nav {
+  padding: 16px;
+}
 
-  .menu-card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    
-  }
+.back-btn {
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+}
 
-  .menu-image {
-    background-color: #e0e0e0;
-    overflow: hidden;
-    height: 100px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
+.container {
+  padding: 20px;
+}
 
-  .menu-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px;
-  }
+.sub-title {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
 
-  .menu-name, .store-name {
-    margin: 2px 0;
-    font-size: 14px;
-  }
+.price-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
 
-  .menu-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #555;
-    margin-top: 6px;
-  }
+.price-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+  border: none;
+  background-color: #f55;
+  color: white;
+  border-radius: 50%;
+  margin: 0 10px;
+}
 
-  .no-result {
-    text-align: center;
-    width: 100%;
-    margin-top: 20px;
-    color: white;
-    font-size: 15px;
-  }
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.category-btn {
+  padding: 6px 14px;
+  border: 2px solid #f55;
+  border-radius: 20px;
+  background-color: white;
+  color: #f55;
+  font-weight: bold;
+}
+
+.category-btn:hover {
+  background-color: #f55;
+  color: white;
+}
+
+.category-btn.active {
+  background-color: #f55;
+  color: white;
+}
+
+/* 메뉴 카드 부분 */
+.menu-section {
+  background-color: #ff4d4d;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.2);
+  padding: 30px 0 50px 0;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 */
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+
+
+.menu-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   
+}
+
+.menu-image {
+  background-color: #e0e0e0;
+  overflow: hidden;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.menu-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.menu-name, .store-name {
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+.menu-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #555;
+  margin-top: 6px;
+}
+
+.no-result {
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+  font-size: 15px;
+}
