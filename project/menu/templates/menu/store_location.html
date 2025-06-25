@@ -62,9 +62,15 @@
     </div>
     
 
-    <div class="button">
+    <div class="reviewBtn">
       <form action="{% url 'menu:store_review' store.id menu.id %}" method="get">
         <button type="submit" class="review-button">리뷰 작성하기</button>
+      </form>
+    </div>
+
+    <div class="dismissBtn">
+      <form action="{% url 'search:home' %}" method="get">
+        <button type="submit" class="exit-button">리뷰는 나중에 할게요</button>
       </form>
     </div>
 
