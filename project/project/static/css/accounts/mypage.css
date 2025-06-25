@@ -140,7 +140,7 @@ color: white;
 .latest-review{
   width: 349px;
   height: 158px;
-  background: linear-gradient(130deg, #ffaeaf 2.67%, rgba(255, 51, 54, 0.797) 58.4%);
+  background: linear-gradient(130deg, #ff8b8d 2.67%, rgba(255, 45, 48, 0.855) 58.4%);
   border-radius: 20px;
 }
 
@@ -148,6 +148,8 @@ color: white;
   display: flex;
   justify-content: center;
   width: 100%;
+  height: fit-content;
+  min-height: 158px;
   margin-top: 50px;
 }
 
@@ -167,6 +169,7 @@ color: white;
   font-size: 15px;
   margin-top: 10px;
   gap: 15px;
+  font-size: 15px;
 }
 
 .latest-review i{
