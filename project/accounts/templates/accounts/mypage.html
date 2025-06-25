@@ -32,30 +32,39 @@
           <p style="margin-top: 10px">주먹밥 개수 🍙 <strong style="margin-left: 8px; font-size: 18px;">{{ riceball_count }}개</strong></p>
         </div>
   
-        <!-- 프로필 아이콘 (프로필 사진 업로드 가능) -->
-        <form id="profileForm" action="{% url 'accounts:upload_profile_image' %}" method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          <label for="profileImageInput">
-            {% if user.profile.image %}
-              <img
-                id="profileImage"
-                src="{{ user.profile.image.url }}"
-                alt="프로필 이미지"
-                class="profile-pic"
-              />
-            {% else %}
-              <div class="profile-pic default-icon" style="margin-left: 28px;">
-                <i class="fa fa-user"></i>
-              </div>
-            {% endif %}
-          </label>
-          <input type="file" name="profile_image" id="profileImageInput" style="display: none;" accept="image/*" onchange="document.getElementById('profileForm').submit();">
-        </form>
+        <!-- 프로필 아이콘 -->
+        <div class="profile-pic default-icon" style="margin-left: 28px;">
+          <i class="fa fa-user"></i>
+        </div>
       </div>
   
     </div>
   </div>
-  
+  {% if latest_review %}Add commentMore actions
+    <div class="latest-review">
+      <p><strong>메뉴 이름</strong> 이 리뷰를 기다리고 있어요!</p>
+      <div class="review-placeholder">[이미지]</div>
+      <button class="close-button">X</button>
+    </div>
+      <div class="latest-review">
+        <p><strong>{{ latest_review.menu.name }}</strong> 이 리뷰를 기다리고 있어요!</p>
+        <p>가게: {{ latest_review.store.name }}</p>
+
+        {% if latest_review.menu.image %}
+          <div class="review-placeholder">
+            <img src="{{ latest_review.menu.image.url }}" alt="메뉴 이미지" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
+          </div>
+        {% else %}
+          <div class="review-placeholder">[이미지 없음]</div>
+        {% endif %}
+
+        <a href="{% url 'menu:store_review' store_id=latest_review.store.id menu_id=latest_review.menu.id %}">
+          <button class="review-button">✍️ 리뷰 작성하러 가기</button>
+        </a>
+        
+        <button class="close-button">X</button>
+      </div>
+    {% endif %}
 
   <div class="menu-list">
     <a href="{% url 'accounts:my_likes' request.user.id %}" class="menu-item">나의 찜<span>›</span></a>

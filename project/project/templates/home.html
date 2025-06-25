@@ -17,32 +17,49 @@
       <iconify-icon icon="mdi:location" style="color: white;" width="18" height="18"></iconify-icon>
       <span>동국대학교</span>
     </div>
-    <div class="header-right">
-      <button class="range-btn">500m</button>
+
+    <!-- 드롭다운 반경 선택 -->
+    <div class="radius-dropdown">
+      <div class="selected-radius" onclick="toggleDropdown()">
+        {{ radius|default:"500" }}m ▼
+      </div>
+      <div class="radius-options" id="radius-options">
+        <a href="{% url 'search:home' %}?radius=500">500m</a>
+        <a href="{% url 'search:home' %}?radius=1000">1km</a>
+        <a href="{% url 'search:home' %}?radius=2500">2.5km</a>
+        <a href="{% url 'search:home' %}?radius=5000">5km</a>
+      </div>
     </div>
   </div>
-
   <h1 class="main-title">밥플</h1>
 
-<!-- 검색부분 -->
-<div class="search-section">
-  <p class="input-label">지금 가진 금액을 입력해주세요!</p>
-  <form id="price-form" method="get" action="{% url 'search:recommend_result' %}">
-    <input type="number" name="price" id="price-input" class="amount-input" placeholder="예) 5000" min="0" step="1000">
-    <button type="submit" class="search-button">검색</button>
-  </form>
-  <p id="price-warning" style="color: red; font-size: 13px; display: none; margin-top: 5px;">
-    1000원 이상의 금액을 입력해주세요.
-  </p>
-</div>
-
-  <!-- 인기 있는 메뉴 (광고) -->
-  <div class="menu-section">
-    <p class="hot-menu"><span style="color: orange;">🔥</span> 인기 있는 메뉴 (광고)</p>
-    <div class="menu-card-placeholder"></div>
+  <!-- 검색 -->
+  <div class="search-section">
+    <p class="input-label">지금 가진 금액을 입력해주세요!</p>
+    <form id="price-form" method="get" action="{% url 'search:recommend_result' %}">
+      <input type="number" name="price" id="price-input" class="amount-input" placeholder="예) 5000" min="0" step="1000">
+      <button type="submit" class="search-button">검색</button>
+    </form>
+    <p id="price-warning" style="color: red; font-size: 13px; display: none; margin-top: 5px;">
+      1000원 이상의 금액을 입력해주세요.
+    </p>
   </div>
 
-  <!-- 하단 네비게이션 바 상속 받아오는거 -->
+
+  <p class="hot-menu"><span style="color: orange;">🔥</span> 인기 있는 메뉴 (광고)</p>
+  {% if advertised_menu %}
+  <div class="menu-card">
+    <div class="ad-image-box">
+      <img src="{{ advertised_menu.image.url }}" alt="{{ advertised_menu.name }}" class="menu-img-ad">
+    </div>
+    <p><strong>{{ advertised_menu.name }}</strong> - {{ advertised_menu.price }}원</p>
+    <p style="font-size: 13px; color: gray;">{{ advertised_menu.store.name }}</p>
+  </div>
+  {% else %}
+  <div class="menu-card-placeholder"></div>
+  {% endif %}
+
+  <!-- 하단 네비게이션 -->
   {% include 'shared/_navbar.html' %}
 
   <script src="{% static 'js/home.js' %}"></script>

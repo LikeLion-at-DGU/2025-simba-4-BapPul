@@ -3,10 +3,13 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from .models import Profile
 from search.models import School
-from menu.models import Like, VisitLog, Review
+from menu.models import Like, VisitLog, Review , Menu , Store
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from stamp.models import Riceball
+from django.db.models import Avg, Count
+from django.http import HttpResponse
+
 
 # Create your views here.
 def login(request):
@@ -95,12 +98,43 @@ def mypage(request, id):
 def my_likes(request, id):
     user = get_object_or_404(User, pk=id)
     profile = user.profile
-    likes = Like.objects.filter(user=profile).select_related('menu__store')  # 메뉴 + 음식점 정보
+    likes = Like.objects.filter(user=profile).select_related('menu__store')
+
+    avg_ratings = {}
+    review_counts = {}
+
+    for like in likes:
+      if like.menu is not None:
+          stats = like.menu.reviews.aggregate(
+              avg_rating=Avg('rating'),
+              review_count=Count('id')
+          )
+          like.avg_rating = stats['avg_rating'] or 0.0
+          like.review_count = stats['review_count']
+          like.reviews = like.menu.reviews.all()
+      else:
+          like.avg_rating = 0.0
+          like.review_count = 0
+          like.reviews = []
+
     context = {
-        'likes': likes
+        'likes': likes,
+        'avg_ratings': avg_ratings,
+        'review_counts': review_counts,
     }
     return render(request, 'accounts/my_likes.html', context)
-
+  
+@login_required
+def unlike_menu(request, menu_id):
+    if request.method == 'POST':
+        profile = request.user.profile
+        menu = get_object_or_404(Menu, id=menu_id)
+        like = Like.objects.filter(user=profile, menu=menu).first()
+        if like:
+            like.delete()
+        return HttpResponse("찜 해제 완료", status=200)
+    return HttpResponse("잘못된 요청", status=400)
+  
 def my_visits(request, id):
     user = get_object_or_404(User, pk=id)
     profile = user.profile

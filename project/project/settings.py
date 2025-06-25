@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'search',
     'menu',
     'accounts',
-    'stamp',
+    #'stamp',
+    'stamp.apps.StampConfig',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,210 @@
+body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    margin: 0;
+    background-color: white;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .point-value {
+    color: #FF4C4F;
+    font-weight: 900;
+    font-size: 18px;
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  .rice-map-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 24px;
+}
+
+.point-text {
+text-align: center;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+margin-bottom: 40px;
+}
+
+.point-value {
+color: #FF4C4F;
+font-weight: 900;
+font-size: 18px;
+margin-left: 8px;
+}
+
+.coin-img {
+width: 16px;
+height: 16px;
+vertical-align: middle;
+margin-left: 4px;
+}
+
+.rice-map-wrapper {
+position: relative;
+border: 2px solid #FF4C4F;
+border-radius: 8px;
+padding: 12px;
+margin-bottom: 32px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rice-map-header {
+display: flex;
+justify-content: space-between;
+padding: 0 8px;
+font-size: 14px;
+font-weight: bold;
+color: #FF4C4F;
+margin-bottom: 30px;
+}
+
+.map-date {
+color: #333;
+font-weight: 400;
+}
+
+.map-bg {
+display: block;
+max-width: 280px;
+width: 100%;
+margin: 0 auto;
+}
+
+.grain-char {
+position: absolute;
+width: 36px;
+height: 36px;
+}
+
+.riceball-history-title {
+text-align: center;
+margin-bottom: 8px;
+}
+
+.riceball-history {
+display: flex;
+flex-wrap: wrap;
+gap: 16px;
+justify-content: center;
+}
+
+.riceball-box {
+display: flex;
+flex-direction: column;
+align-items: center;
+font-size: 12px;
+}
+
+.riceball-box img {
+width: 64px;
+height: 64px;
+margin-bottom: 6px;
+}
+
+  .rice-map-wrapper {
+position: relative;
+width: 350px;
+height: 290px;
+margin: 0 auto 32px auto;
+border: 2px solid #FF4C4F;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+padding: 8px;
+}
+
+.map-bg {
+width: 100%;
+height: auto;
+display: block;
+}
+
+.grain-char {
+position: absolute;
+width: 48px;
+height: 48px;
+}
+
+
+/* 정확한 위치 조정 */
+.grain-1 { top: 60px; left: 58px; }
+.grain-2 { top: 60px; left: 160px; }
+.grain-3 { top: 60px; left: 262px; }
+
+.grain-4 { top: 138px; left: 58px; }
+.grain-5 { top: 138px; left: 160px; }
+.grain-6 { top: 138px; left: 262px; }
+
+.grain-7 { top: 216px; left: 58px; }
+.grain-8 { top: 216px; left: 160px; }
+.grain-9 { top: 216px; left: 262px; }
+
+
+.rice-map-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 6px 8px;
+font-size: 14px;
+font-weight: 700;
+color: #FF4C4F;
+}
+
+.map-title {
+font-size: 15px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+}
+
+.map-date {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+
+
+  .riceball-history-title {
+    margin-bottom: 20px;
+    font-size: 15px;
+font-style: normal;
+font-weight: 800;
+line-height: normal;
+  }
+
+  .riceball-history {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+
+  .riceball-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .riceball-box img {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 6px;
+  }
+
+  hr {
+    margin: 32px 0;
+    border: none;
+    border-top: 1px solid #eee;
+  }

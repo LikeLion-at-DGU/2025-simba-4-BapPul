@@ -29,5 +29,6 @@ urlpatterns = [
     path('menu/', include('menu.urls')),
     path('search/', include('search.urls')),
     path('stamp/',include('stamp.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

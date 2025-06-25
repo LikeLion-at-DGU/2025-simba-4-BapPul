@@ -7,7 +7,7 @@ let userSchool = document.getElementById('user-school');
 const button = document.getElementById("signupBtn");
 
 function checkId(value) {
-    return value.length >= 8 &&
+    return value.length <= 8 &&
         /[A-Za-z]/.test(value) &&
         /[0-9]/.test(value) &&
         /^[A-Za-z0-9]+$/.test(value);
@@ -47,6 +47,15 @@ function validateForm() {
         button.style.color = 'white';
         button.style.cursor = 'not-allowed';
     }
+
+    console.log({
+        idValid,
+        pwValid,
+        pwSame,
+        nameValid,
+        schoolFilled
+    });
+    
 }
 
 [userId, userPw, userPwcheck, userName, userSchool].forEach(el => {
