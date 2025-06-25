@@ -79,6 +79,7 @@
 
       {% endfor %} {% endcomment %}
 
+      <div class="menu-section">
       <div class="menu-grid">
       {% for m in menus %}
         <a href="{% url 'menu:store_detail' store_id=m.menu.store.id menu_id=m.menu.id %}" class="menu-card">
@@ -101,6 +102,8 @@
         </a>
       {% endfor %}
       </div>
+    </div>
+
 
 
       <!-- 하드코딩된 카드 리스트 -->
